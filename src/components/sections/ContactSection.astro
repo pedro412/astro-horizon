@@ -1,0 +1,109 @@
+---
+import Section from '../ui/Section.astro';
+import Container from '../ui/Container.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import Button from '../ui/Button.astro';
+
+interface Props {
+  contact: {
+    heading: string;
+    subheading: string;
+    form: {
+      nameLabel: string;
+      emailLabel: string;
+      companyLabel: string;
+      messageLabel: string;
+      submitCta: string;
+    };
+    quickAction: {
+      label: string;
+      description: string;
+      whatsappCta: string;
+    };
+  };
+  phoneNumber: string;
+}
+
+const { contact, phoneNumber } = Astro.props satisfies Props;
+
+const whatsappHref = `https://wa.me/${phoneNumber.replace(/[^+\d]/g, '')}`;
+---
+
+<Section id="contact" background="tint">
+  <Container class="grid gap-12 lg:grid-cols-[1.1fr_1fr]">
+    <div>
+      <SectionHeading
+        eyebrow="CONTACT"
+        title={contact.heading}
+        description={contact.subheading}
+      />
+      <div class="mt-10 rounded-3xl border border-ocean-100 bg-white/95 p-8 shadow-sm">
+        <form class="grid gap-6">
+          <label class="block">
+            <span class="text-xs font-medium uppercase tracking-[0.2em] text-deep/60">
+              {contact.form.nameLabel}
+            </span>
+            <input
+              type="text"
+              name="name"
+              required
+              class="mt-2 w-full rounded-2xl border border-ocean-100 bg-white px-4 py-3 text-sm text-deep shadow-sm focus:border-ocean-300 focus:outline-none focus:ring-2 focus:ring-ocean-100"
+            />
+          </label>
+          <label class="block">
+            <span class="text-xs font-medium uppercase tracking-[0.2em] text-deep/60">
+              {contact.form.emailLabel}
+            </span>
+            <input
+              type="email"
+              name="email"
+              required
+              class="mt-2 w-full rounded-2xl border border-ocean-100 bg-white px-4 py-3 text-sm text-deep shadow-sm focus:border-ocean-300 focus:outline-none focus:ring-2 focus:ring-ocean-100"
+            />
+          </label>
+          <label class="block">
+            <span class="text-xs font-medium uppercase tracking-[0.2em] text-deep/60">
+              {contact.form.companyLabel}
+            </span>
+            <input
+              type="text"
+              name="company"
+              class="mt-2 w-full rounded-2xl border border-ocean-100 bg-white px-4 py-3 text-sm text-deep shadow-sm focus:border-ocean-300 focus:outline-none focus:ring-2 focus:ring-ocean-100"
+            />
+          </label>
+          <label class="block">
+            <span class="text-xs font-medium uppercase tracking-[0.2em] text-deep/60">
+              {contact.form.messageLabel}
+            </span>
+            <textarea
+              name="message"
+              rows={4}
+              class="mt-2 w-full rounded-2xl border border-ocean-100 bg-white px-4 py-3 text-sm text-deep shadow-sm focus:border-ocean-300 focus:outline-none focus:ring-2 focus:ring-ocean-100"
+            ></textarea>
+          </label>
+          <Button type="submit" variant="primary" size="lg" class="justify-center">
+            {contact.form.submitCta}
+          </Button>
+        </form>
+      </div>
+    </div>
+    <aside class="flex flex-col justify-center gap-6 rounded-3xl border border-ocean-100 bg-white p-10 shadow-sm">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-ocean-500">
+        {contact.quickAction.label}
+      </p>
+      <p class="text-2xl font-display font-semibold text-deep leading-snug">
+        {contact.quickAction.description}
+      </p>
+      <Button
+        variant="primary"
+        size="lg"
+        href={whatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="justify-center"
+      >
+        {contact.quickAction.whatsappCta}
+      </Button>
+    </aside>
+  </Container>
+</Section>

@@ -1,0 +1,34 @@
+---
+interface Props {
+  id?: string;
+  class?: string;
+  background?: 'default' | 'tint' | 'dark';
+  spacing?: 'default' | 'compact' | 'relaxed';
+}
+
+const {
+  id,
+  class: className = '',
+  background = 'default',
+  spacing = 'default',
+} = Astro.props satisfies Props;
+
+const backgroundStyles: Record<Props['background'], string> = {
+  default: 'bg-transparent',
+  tint: 'bg-white',
+  dark: 'bg-deep text-white',
+};
+
+const spacingStyles: Record<Props['spacing'], string> = {
+  compact: 'py-10 sm:py-14',
+  default: 'py-16 sm:py-20',
+  relaxed: 'py-24 sm:py-32',
+};
+---
+
+<section
+  id={id}
+  class={`${backgroundStyles[background]} ${spacingStyles[spacing]} ${className}`}
+>
+  <slot />
+</section>

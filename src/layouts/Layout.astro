@@ -1,22 +1,51 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import '../styles/global.css';
+import SiteHeader from '../components/layout/SiteHeader.astro';
+import SiteFooter from '../components/layout/SiteFooter.astro';
+import type { Messages, Locale } from '../i18n/config';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+interface Props {
+  locale: Locale;
+  messages: Messages;
+  alternateLinks?: { href: string; lang: string }[];
+  languageSwitcher: {
+    current: Locale;
+    options: { label: string; value: Locale; href: string }[];
+  };
+}
+
+const { locale, messages, alternateLinks = [], languageSwitcher } = Astro.props satisfies Props;
+---
+
+<!doctype html>
+<html lang={locale} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{messages.meta.title}</title>
+    <meta name="description" content={messages.meta.description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    {alternateLinks.map((link) => (
+      <link rel="alternate" hrefLang={link.lang} href={link.href} />
+    ))}
+  </head>
+  <body class="relative min-h-screen">
+    <SiteHeader
+      locale={locale}
+      nav={messages.nav}
+      contactCta={messages.contact.form.submitCta}
+      languageSwitcher={languageSwitcher}
+    />
+    <main class="relative min-h-screen overflow-hidden pt-24 sm:pt-28">
+      <slot />
+    </main>
+    <SiteFooter footer={messages.footer} />
+  </body>
+</html>

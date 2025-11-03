@@ -1,0 +1,57 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit';
+  class?: string;
+  icon?: string;
+  target?: string;
+  rel?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  class: className = '',
+  target,
+  rel,
+} = Astro.props satisfies Props;
+
+const baseStyles =
+  'inline-flex items-center justify-center gap-2 rounded-full font-semibold transition duration-200 transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-60';
+
+const variantStyles: Record<Props['variant'], string> = {
+  primary:
+    'bg-ocean-500 text-white shadow-md hover:bg-ocean-600 focus-visible:outline-ocean-300 active:scale-[0.99]',
+  secondary:
+    'bg-white text-deep border border-ocean-100 shadow-sm hover:border-ocean-200 hover:shadow-md focus-visible:outline-ocean-200 active:scale-[0.99]',
+  ghost:
+    'bg-transparent text-white border border-white/30 hover:border-white/60 hover:bg-white/10 focus-visible:outline-white/70 active:scale-[0.99]',
+};
+
+const sizeStyles: Record<Props['size'], string> = {
+  md: 'px-6 py-2.5 text-sm',
+  lg: 'px-8 py-3.5 text-base',
+};
+---
+
+{href ? (
+  <a
+    class={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
+    href={href}
+    target={target}
+    rel={rel}
+  >
+    <slot />
+  </a>
+) : (
+  <button
+    type={type}
+    class={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
+  >
+    <slot />
+  </button>
+)}
