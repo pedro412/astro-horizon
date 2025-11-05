@@ -18,19 +18,22 @@ interface Props {
 const { hero } = Astro.props satisfies Props;
 ---
 
-<section id="hero" class="relative isolate flex min-h-[85vh] items-center overflow-hidden bg-deep text-white">
+<section
+  id="hero"
+  class="relative isolate overflow-hidden bg-[#03172f] py-28 text-white sm:py-32"
+>
   <div aria-hidden="true" class="absolute inset-0">
     <picture>
       <source srcset={hero.backgroundFallback} />
       <img
         src={hero.backgroundFallback}
         alt=""
-        class="h-full w-full object-cover opacity-40"
+        class="h-full w-full object-cover opacity-20"
         loading="lazy"
       />
     </picture>
     <video
-      class="absolute inset-0 h-full w-full object-cover opacity-40"
+      class="absolute inset-0 h-full w-full object-cover opacity-25"
       src={hero.backgroundVideo}
       autoplay
       muted
@@ -38,11 +41,13 @@ const { hero } = Astro.props satisfies Props;
       playsinline
       poster={hero.backgroundFallback}
     ></video>
-    <div class="absolute inset-0 bg-hero-overlay opacity-90 mix-blend-multiply"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(51,177,255,0.2),transparent_55%)]"></div>
+    <div class="absolute inset-x-0 bottom-[-160px] h-[420px] bg-[radial-gradient(circle,rgba(15,98,254,0.18),transparent_60%)]"></div>
   </div>
-  <Container class="relative z-10 grid gap-14 lg:grid-cols-[1fr_auto] lg:items-center">
-    <div class="max-w-2xl space-y-6">
-      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-coral-200/80">
+  <Container class="relative z-10 grid gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.85fr)] lg:items-center">
+    <div class="max-w-2xl space-y-7">
+      <p class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/80">
+        <span class="inline-block h-2 w-2 rounded-full bg-white/60"></span>
         {hero.tag}
       </p>
       <h1 class="font-display text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
@@ -50,19 +55,24 @@ const { hero } = Astro.props satisfies Props;
       </h1>
       <p class="text-base text-white/80 sm:text-lg">{hero.subtitle}</p>
       <div class="flex flex-wrap gap-3">
-        <Button variant="primary" size="lg" href="#contact">
+        <Button variant="primary" size="lg" href="#contact" class="shadow-lg shadow-[#0f62fe]/40">
           {hero.primaryCta}
         </Button>
-        <Button variant="secondary" size="lg" href="#services" class="bg-white/90 backdrop-blur hover:bg-white">
+        <Button
+          variant="secondary"
+          size="lg"
+          href="#services"
+          class="border-white/30 bg-white/15 text-white hover:bg-white/25"
+        >
           {hero.secondaryCta}
         </Button>
       </div>
     </div>
-    <div class="grid gap-8 rounded-3xl border border-white/15 bg-white/10 p-6 backdrop-blur-sm sm:grid-cols-3 sm:gap-6 sm:p-8 lg:grid-cols-1">
+    <div class="grid gap-6 rounded-[28px] border border-white/12 bg-white/5 p-6 backdrop-blur-lg sm:grid-cols-3 sm:p-8 lg:grid-cols-1">
       {hero.highlightStats.map((stat) => (
-        <div class="space-y-1">
+        <div class="rounded-2xl border border-white/10 bg-white/10 px-6 py-5 text-center shadow-[0_10px_30px_-20px_rgba(0,0,0,0.65)]">
           <p class="font-display text-3xl font-semibold text-white sm:text-4xl">{stat.value}</p>
-          <p class="text-xs uppercase tracking-[0.2em] text-white/70">{stat.label}</p>
+          <p class="mt-2 text-xs uppercase tracking-[0.2em] text-white/70">{stat.label}</p>
         </div>
       ))}
     </div>

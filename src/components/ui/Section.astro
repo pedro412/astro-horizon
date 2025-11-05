@@ -15,7 +15,8 @@ const {
 
 const backgroundStyles: Record<Props['background'], string> = {
   default: 'bg-transparent',
-  tint: 'bg-white',
+  tint:
+    "relative isolate overflow-hidden bg-gradient-to-br from-[#e1e9fb] via-[#f3f6ff] to-white before:absolute before:inset-0 before:-z-10 before:bg-[radial-gradient(circle_at_top_left,rgba(15,98,254,0.2),transparent_55%)] before:opacity-95 before:content-[''] after:absolute after:inset-x-0 after:bottom-[-140px] after:h-[460px] after:-z-10 after:bg-[radial-gradient(circle_at_bottom,rgba(10,182,139,0.28),transparent_65%)] after:opacity-85 after:content-['']",
   dark: 'bg-deep text-white',
 };
 
