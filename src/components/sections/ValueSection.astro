@@ -21,6 +21,7 @@ const { value } = Astro.props satisfies Props;
         eyebrow="BLUEHORIZON EDGE"
         title={value.heading}
         description={value.lead}
+        theme="dark"
       />
     </div>
     <div class="relative z-10 grid gap-6 sm:grid-cols-2">
@@ -36,6 +37,5 @@ const { value } = Astro.props satisfies Props;
         </div>
       ))}
     </div>
-    <div class="pointer-events-none absolute inset-0 -z-10 rounded-[40px] bg-[radial-gradient(circle_at_top_right,rgba(15,98,254,0.12),transparent_55%)]"></div>
   </Container>
 </Section>

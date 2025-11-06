@@ -36,6 +36,7 @@ const whatsappHref = `https://wa.me/${phoneNumber.replace(/[^+\d]/g, '')}`;
         eyebrow="CONTACT"
         title={contact.heading}
         description={contact.subheading}
+        theme="dark"
       />
       <div class="mt-10 rounded-[30px] bg-white/95 p-8 shadow-[0_25px_70px_-50px_rgba(9,34,64,0.65)] ring-1 ring-ocean-100/50">
         <form class="grid gap-6">
@@ -87,7 +88,7 @@ const whatsappHref = `https://wa.me/${phoneNumber.replace(/[^+\d]/g, '')}`;
         </form>
       </div>
     </div>
-    <aside class="relative flex flex-col justify-center gap-6 rounded-[30px] bg-gradient-to-br from-[#03172f] via-[#052b52] to-[#0b3f73] p-10 text-white shadow-[0_25px_60px_-45px_rgba(9,34,64,0.75)]">
+    <aside class="relative flex flex-col justify-center gap-6 rounded-[30px] bg-[#0a1f3f] p-10 text-white shadow-[0_25px_60px_-45px_rgba(9,34,64,0.75)] ring-1 ring-white/10">
       <div class="inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/75">
         <span class="inline-block h-2 w-2 rounded-full bg-emerald-300"></span>
         {contact.quickAction.label}
@@ -106,6 +107,5 @@ const whatsappHref = `https://wa.me/${phoneNumber.replace(/[^+\d]/g, '')}`;
         {contact.quickAction.whatsappCta}
       </Button>
     </aside>
-    <div class="pointer-events-none absolute inset-0 -z-10 rounded-[44px] bg-[radial-gradient(circle_at_bottom_left,rgba(15,98,254,0.14),transparent_55%)]"></div>
   </Container>
 </Section>
