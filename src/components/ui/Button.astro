@@ -25,9 +25,9 @@ const baseStyles =
 
 const variantStyles: Record<Props['variant'], string> = {
   primary:
-    'bg-ocean-500 text-white shadow-md hover:bg-ocean-600 focus-visible:outline-ocean-300 active:scale-[0.99]',
+    'bg-gradient-to-r from-[#0f62fe] to-[#33b1ff] text-white shadow-lg shadow-[#0f62fe]/30 hover:from-[#0b4ad6] hover:to-[#2a9beb] focus-visible:outline-[#2a9beb]/60 active:scale-[0.99]',
   secondary:
-    'bg-white text-deep border border-ocean-100 shadow-sm hover:border-ocean-200 hover:shadow-md focus-visible:outline-ocean-200 active:scale-[0.99]',
+    'bg-white text-deep border border-ocean-100/80 shadow-sm hover:border-ocean-200 hover:shadow-md focus-visible:outline-ocean-200 active:scale-[0.99]',
   ghost:
     'bg-transparent text-white border border-white/30 hover:border-white/60 hover:bg-white/10 focus-visible:outline-white/70 active:scale-[0.99]',
 };
