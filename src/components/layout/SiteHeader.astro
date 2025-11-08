@@ -1,7 +1,7 @@
 ---
 import Button from '../ui/Button.astro';
 import Container from '../ui/Container.astro';
-import type { Locale } from '../../i18n/config';
+import { defaultLocale, type Locale } from '../../i18n/config';
 
 interface Props {
   nav: { label: string; href: string }[];
@@ -14,11 +14,12 @@ interface Props {
 }
 
 const { nav, locale, languageSwitcher, contactCta } = Astro.props satisfies Props;
+const homeHref = locale === defaultLocale ? '/' : `/${locale}`;
 ---
 
 <header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[rgba(5,9,20,0.72)] shadow-[0_20px_60px_-40px_rgba(10,132,255,0.6)] backdrop-blur-2xl">
   <Container class="flex h-20 items-center gap-6">
-    <a href={`/${locale}`} class="flex items-center gap-3 text-white transition hover:opacity-90">
+    <a href={homeHref} class="flex items-center gap-3 text-white transition hover:opacity-90">
       <div class="flex h-9 w-9 items-center justify-center rounded-full bg-[#0A84FF] font-display text-base font-semibold text-white shadow-[0_10px_25px_-10px_rgba(10,132,255,0.9)]">
         BH
       </div>

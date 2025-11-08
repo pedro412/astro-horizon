@@ -5,7 +5,7 @@ import ValueSection from '../../components/sections/ValueSection.astro';
 import ServicesSection from '../../components/sections/ServicesSection.astro';
 import TestimonialsSection from '../../components/sections/TestimonialsSection.astro';
 import ContactSection from '../../components/sections/ContactSection.astro';
-import { getMessages, locales, type Locale } from '../../i18n/config';
+import { defaultLocale, getMessages, locales, type Locale } from '../../i18n/config';
 import { resolveLocale, getAlternateLinks, buildLocaleUrl } from '../../i18n/utils';
 
 export async function getStaticPaths() {
@@ -15,10 +15,20 @@ export async function getStaticPaths() {
 }
 
 const langParam = Astro.params.lang;
+
+if (!langParam) {
+  return Astro.redirect('/');
+}
+
 const locale = resolveLocale(langParam) as Locale;
 
-if (!langParam || locale !== langParam) {
-  return Astro.redirect(`/${locale}`);
+if (locale !== langParam) {
+  const target = locale === defaultLocale ? '/' : `/${locale}`;
+  return Astro.redirect(target);
+}
+
+if (locale === defaultLocale) {
+  return Astro.redirect('/');
 }
 
 const messages = getMessages(locale);

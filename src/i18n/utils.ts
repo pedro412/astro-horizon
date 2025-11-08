@@ -6,7 +6,8 @@ export function resolveLocale(param?: string): Locale {
 
 export function buildLocaleUrl(locale: Locale, url: URL): string {
   const hash = url.hash ?? '';
-  return `/${locale}${hash}`;
+  const path = locale === defaultLocale ? '/' : `/${locale}`;
+  return `${path}${hash}`;
 }
 
 export function getAlternateLinks(currentLocale: Locale, url: URL) {
