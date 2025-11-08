@@ -43,13 +43,13 @@ const { hero } = Astro.props satisfies Props;
   </div>
   <Container class="relative z-10 grid gap-14 lg:grid-cols-[1fr_auto] lg:items-center">
     <div class="max-w-2xl space-y-6">
-      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-coral-200/80">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-white">
         {hero.tag}
       </p>
       <h1 class="font-display text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
         <span class="text-gradient">{hero.title}</span>
       </h1>
-      <p class="text-base text-white/80 sm:text-lg">{hero.subtitle}</p>
+      <p class="text-base text-white sm:text-lg">{hero.subtitle}</p>
       <div class="flex flex-wrap gap-3">
         <Button variant="primary" size="lg" href="#contact">
           {hero.primaryCta}
@@ -63,7 +63,7 @@ const { hero } = Astro.props satisfies Props;
       {hero.highlightStats.map((stat) => (
         <div class="space-y-1">
           <p class="font-display text-3xl font-semibold text-white sm:text-4xl">{stat.value}</p>
-          <p class="text-xs uppercase tracking-[0.2em] text-white/70">{stat.label}</p>
+          <p class="text-xs uppercase tracking-[0.2em] text-white">{stat.label}</p>
         </div>
       ))}
     </div>
