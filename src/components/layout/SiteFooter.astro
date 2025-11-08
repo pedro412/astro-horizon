@@ -17,26 +17,26 @@ interface Props {
 const { footer } = Astro.props satisfies Props;
 ---
 
-<footer class="border-t border-ocean-100 bg-white text-deep">
+<footer class="border-t border-white/10 bg-[rgba(5,9,20,0.72)] text-white backdrop-blur-2xl">
   <Container class="grid gap-12 py-16 md:grid-cols-4">
     <div class="md:col-span-2">
       <div class="flex items-center gap-4">
-        <div class="flex h-11 w-11 items-center justify-center rounded-full bg-ocean-500 font-display text-xl font-semibold text-white">
+        <div class="flex h-11 w-11 items-center justify-center rounded-full bg-[#0A84FF] font-display text-xl font-semibold text-white shadow-[0_15px_40px_-20px_rgba(10,132,255,0.8)]">
           BH
         </div>
         <div>
-          <p class="font-display text-xl font-semibold text-deep">BlueHorizon</p>
-          <p class="text-xs uppercase tracking-[0.25em] text-deep/50">Maritime &amp; Docks</p>
+          <p class="font-display text-xl font-semibold text-white">BlueHorizon</p>
+          <p class="text-xs uppercase tracking-[0.25em] text-white/50">Maritime &amp; Docks</p>
         </div>
       </div>
-      <p class="mt-6 max-w-md text-sm text-deep/60">{footer.tagline}</p>
+      <p class="mt-6 max-w-md text-sm text-white/70">{footer.tagline}</p>
     </div>
     <div>
-      <h4 class="text-xs font-semibold uppercase tracking-[0.25em] text-deep/50">{footer.officesHeading}</h4>
-      <ul class="mt-4 space-y-3 text-sm text-deep/70">
+      <h4 class="text-xs font-semibold uppercase tracking-[0.25em] text-white/50">{footer.officesHeading}</h4>
+      <ul class="mt-4 space-y-3 text-sm text-white/70">
         {footer.offices.map((office) => (
           <li>
-            <p class="font-semibold text-deep">{office.city}</p>
+            <p class="font-semibold text-white">{office.city}</p>
             <p>{office.address}</p>
           </li>
         ))}
@@ -44,23 +44,23 @@ const { footer } = Astro.props satisfies Props;
     </div>
     <div class="space-y-8">
       <div>
-        <h4 class="text-xs font-semibold uppercase tracking-[0.25em] text-deep/50">{footer.contactHeading}</h4>
-        <div class="mt-4 space-y-2 text-sm text-deep/70">
-          <a class="block transition hover:text-ocean-600" href={`tel:${footer.contact.phone.replace(/[^+\d]/g, '')}`}>
+        <h4 class="text-xs font-semibold uppercase tracking-[0.25em] text-white/50">{footer.contactHeading}</h4>
+        <div class="mt-4 space-y-2 text-sm text-white/70">
+          <a class="block transition hover:text-white" href={`tel:${footer.contact.phone.replace(/[^+\d]/g, '')}`}>
             {footer.contact.phone}
           </a>
-          <a class="block transition hover:text-ocean-600" href={`mailto:${footer.contact.email}`}>
+          <a class="block transition hover:text-white" href={`mailto:${footer.contact.email}`}>
             {footer.contact.email}
           </a>
         </div>
       </div>
       <div>
-        <h4 class="text-xs font-semibold uppercase tracking-[0.25em] text-deep/50">{footer.socialHeading}</h4>
+        <h4 class="text-xs font-semibold uppercase tracking-[0.25em] text-white/50">{footer.socialHeading}</h4>
         <ul class="mt-4 flex flex-wrap gap-3 text-sm">
           {footer.socials.map((social) => (
             <li>
               <a
-                class="rounded-full border border-ocean-100 px-3 py-1.5 text-deep/70 transition hover:border-ocean-200 hover:text-ocean-600"
+                class="rounded-full border border-white/15 px-3 py-1.5 text-white/70 transition hover:border-white/40 hover:text-white"
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -73,8 +73,8 @@ const { footer } = Astro.props satisfies Props;
       </div>
     </div>
   </Container>
-  <div class="border-t border-ocean-100">
-    <Container class="py-6 text-center text-xs uppercase tracking-[0.2em] text-deep/40">
+  <div class="border-t border-white/10">
+    <Container class="py-6 text-center text-xs uppercase tracking-[0.2em] text-white/40">
       {footer.legal}
     </Container>
   </div>
