@@ -37,7 +37,9 @@ const whatsappHref = `https://wa.me/${phoneNumber.replace(/[^+\d]/g, '')}`;
         title={contact.heading}
         description={contact.subheading}
       />
-      <div class="mt-10 rounded-[26px] border border-white/15 bg-white/10 p-8 shadow-[0_35px_120px_-60px_rgba(10,132,255,0.55)] backdrop-blur-2xl">
+      <div
+        class="relative mt-10 overflow-hidden rounded-[28px] border border-white/20 bg-white/10 p-8 backdrop-blur-2xl"
+      >
         <form class="grid gap-6">
           <label class="block">
             <span class="text-xs font-medium uppercase tracking-[0.2em] text-white/60">
@@ -87,7 +89,9 @@ const whatsappHref = `https://wa.me/${phoneNumber.replace(/[^+\d]/g, '')}`;
         </form>
       </div>
     </div>
-    <aside class="flex flex-col justify-center gap-6 rounded-[26px] border border-white/15 bg-white/10 p-10 text-white shadow-[0_35px_120px_-60px_rgba(10,132,255,0.55)] backdrop-blur-2xl">
+    <aside
+      class="relative flex flex-col justify-center gap-6 overflow-hidden rounded-[28px] border border-white/20 bg-white/10 p-10 text-white backdrop-blur-2xl"
+    >
       <p class="text-xs font-semibold uppercase tracking-[0.25em] text-coral-200/80">
         {contact.quickAction.label}
       </p>
