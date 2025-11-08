@@ -15,8 +15,9 @@ const {
 
 const backgroundStyles: Record<Props['background'], string> = {
   default: 'bg-transparent',
-  tint: 'bg-white',
-  dark: 'bg-deep text-white',
+  tint:
+    'relative isolate overflow-hidden border-y border-white/10 bg-[rgba(12,18,30,0.72)] backdrop-blur-2xl',
+  dark: 'bg-[#030711]',
 };
 
 const spacingStyles: Record<Props['spacing'], string> = {

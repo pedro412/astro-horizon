@@ -21,15 +21,15 @@ const {
 } = Astro.props satisfies Props;
 
 const baseStyles =
-  'inline-flex items-center justify-center gap-2 rounded-full font-semibold transition duration-200 transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-60';
+  'inline-flex items-center justify-center gap-2 rounded-full font-semibold transition duration-200 transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-60 backdrop-blur-xl';
 
 const variantStyles: Record<Props['variant'], string> = {
   primary:
-    'bg-ocean-500 text-white shadow-md hover:bg-ocean-600 focus-visible:outline-ocean-300 active:scale-[0.99]',
+    'bg-[#0A84FF] text-white !text-white shadow-[0_25px_70px_-25px_rgba(10,132,255,0.65)] hover:bg-[#2997FF] focus-visible:outline-[#2997FF]/60 active:scale-[0.99]',
   secondary:
-    'bg-white text-deep border border-ocean-100 shadow-sm hover:border-ocean-200 hover:shadow-md focus-visible:outline-ocean-200 active:scale-[0.99]',
+    'bg-white/10 text-white border border-white/20 shadow-[0_20px_50px_-30px_rgba(15,118,230,0.6)] hover:bg-white/20 focus-visible:outline-white/60 active:scale-[0.99]',
   ghost:
-    'bg-transparent text-white border border-white/30 hover:border-white/60 hover:bg-white/10 focus-visible:outline-white/70 active:scale-[0.99]',
+    'bg-transparent text-white border border-white/25 hover:border-white/50 hover:bg-white/10 focus-visible:outline-white/60 active:scale-[0.99]',
 };
 
 const sizeStyles: Record<Props['size'], string> = {
