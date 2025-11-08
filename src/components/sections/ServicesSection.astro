@@ -26,7 +26,7 @@ const { services, ctaLabel } = Astro.props satisfies Props;
     />
     <div class="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
       {services.items.map((service) => (
-        <article class="flex h-full flex-col overflow-hidden rounded-3xl border border-ocean-100 bg-white/95 shadow-sm">
+        <article class="flex h-full flex-col overflow-hidden rounded-[26px] border border-white/15 bg-white/10 shadow-[0_35px_120px_-60px_rgba(10,132,255,0.5)] backdrop-blur-2xl">
           <div class="relative aspect-[4/3] overflow-hidden">
             <img
               src={service.image}
@@ -34,13 +34,13 @@ const { services, ctaLabel } = Astro.props satisfies Props;
               class="h-full w-full object-cover"
               loading="lazy"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-deep/60 via-deep/0 opacity-60"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#050914]/80 via-[#050914]/10"></div>
           </div>
           <div class="flex flex-1 flex-col p-8">
-            <h3 class="font-display text-2xl font-semibold text-deep">{service.title}</h3>
-            <p class="mt-3 text-base text-deep/70">{service.description}</p>
+            <h3 class="font-display text-2xl font-semibold text-white">{service.title}</h3>
+            <p class="mt-3 text-base text-white/70">{service.description}</p>
             <div class="mt-5 pt-4">
-              <Button variant="primary" size="md" href="#contact">
+              <Button variant="secondary" size="md" href="#contact">
                 {ctaLabel}
               </Button>
             </div>
