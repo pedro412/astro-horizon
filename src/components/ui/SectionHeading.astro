@@ -18,14 +18,14 @@ const {
 const alignStyles = align === 'center' ? 'mx-auto text-center' : '';
 const eyebrowStyles =
   theme === 'dark'
-    ? 'text-xs font-semibold uppercase tracking-[0.25em] text-white/60'
-    : 'text-xs font-semibold uppercase tracking-[0.25em] text-coral-200/80';
+    ? 'text-xs font-semibold uppercase tracking-[0.25em] text-white'
+    : 'text-xs font-semibold uppercase tracking-[0.25em] text-white';
 const titleStyles =
   theme === 'dark'
     ? 'font-display text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-white'
     : 'font-display text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-white';
 const descriptionStyles =
-  theme === 'dark' ? 'mt-4 text-base text-white/70' : 'mt-4 text-base text-white/70';
+  theme === 'dark' ? 'mt-4 text-base text-white' : 'mt-4 text-base text-white';
 ---
 
 <div class={`max-w-3xl ${alignStyles}`}>

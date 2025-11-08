@@ -42,7 +42,7 @@ const whatsappHref = `https://wa.me/${phoneNumber.replace(/[^+\d]/g, '')}`;
       >
         <form class="grid gap-6">
           <label class="block">
-            <span class="text-xs font-medium uppercase tracking-[0.2em] text-white/60">
+            <span class="text-xs font-medium uppercase tracking-[0.2em] text-white">
               {contact.form.nameLabel}
             </span>
             <input
@@ -53,7 +53,7 @@ const whatsappHref = `https://wa.me/${phoneNumber.replace(/[^+\d]/g, '')}`;
             />
           </label>
           <label class="block">
-            <span class="text-xs font-medium uppercase tracking-[0.2em] text-white/60">
+            <span class="text-xs font-medium uppercase tracking-[0.2em] text-white">
               {contact.form.emailLabel}
             </span>
             <input
@@ -64,7 +64,7 @@ const whatsappHref = `https://wa.me/${phoneNumber.replace(/[^+\d]/g, '')}`;
             />
           </label>
           <label class="block">
-            <span class="text-xs font-medium uppercase tracking-[0.2em] text-white/60">
+            <span class="text-xs font-medium uppercase tracking-[0.2em] text-white">
               {contact.form.companyLabel}
             </span>
             <input
@@ -74,7 +74,7 @@ const whatsappHref = `https://wa.me/${phoneNumber.replace(/[^+\d]/g, '')}`;
             />
           </label>
           <label class="block">
-            <span class="text-xs font-medium uppercase tracking-[0.2em] text-white/60">
+            <span class="text-xs font-medium uppercase tracking-[0.2em] text-white">
               {contact.form.messageLabel}
             </span>
             <textarea
@@ -89,12 +89,8 @@ const whatsappHref = `https://wa.me/${phoneNumber.replace(/[^+\d]/g, '')}`;
         </form>
       </div>
     </div>
-    <aside
-      class="relative flex flex-col justify-center gap-6 overflow-hidden rounded-[28px] border border-white/20 bg-white/10 p-10 text-white backdrop-blur-2xl"
-    >
-      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-coral-200/80">
-        {contact.quickAction.label}
-      </p>
+    <aside class="relative flex flex-col justify-center gap-6 overflow-hidden rounded-[28px] border border-white/20 bg-white/10 p-10 text-white backdrop-blur-2xl">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-white">{contact.quickAction.label}</p>
       <p class="text-2xl font-display font-semibold leading-snug text-white">
         {contact.quickAction.description}
       </p>

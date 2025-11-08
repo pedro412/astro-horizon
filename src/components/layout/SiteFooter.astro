@@ -26,14 +26,14 @@ const { footer } = Astro.props satisfies Props;
         </div>
         <div>
           <p class="font-display text-xl font-semibold text-white">BlueHorizon</p>
-          <p class="text-xs uppercase tracking-[0.25em] text-white/50">Maritime &amp; Docks</p>
+          <p class="text-xs uppercase tracking-[0.25em] text-white">Maritime &amp; Docks</p>
         </div>
       </div>
-      <p class="mt-6 max-w-md text-sm text-white/70">{footer.tagline}</p>
+      <p class="mt-6 max-w-md text-sm text-white">{footer.tagline}</p>
     </div>
     <div>
-      <h4 class="text-xs font-semibold uppercase tracking-[0.25em] text-white/50">{footer.officesHeading}</h4>
-      <ul class="mt-4 space-y-3 text-sm text-white/70">
+      <h4 class="text-xs font-semibold uppercase tracking-[0.25em] text-white">{footer.officesHeading}</h4>
+      <ul class="mt-4 space-y-3 text-sm text-white">
         {footer.offices.map((office) => (
           <li>
             <p class="font-semibold text-white">{office.city}</p>
@@ -44,8 +44,8 @@ const { footer } = Astro.props satisfies Props;
     </div>
     <div class="space-y-8">
       <div>
-        <h4 class="text-xs font-semibold uppercase tracking-[0.25em] text-white/50">{footer.contactHeading}</h4>
-        <div class="mt-4 space-y-2 text-sm text-white/70">
+        <h4 class="text-xs font-semibold uppercase tracking-[0.25em] text-white">{footer.contactHeading}</h4>
+        <div class="mt-4 space-y-2 text-sm text-white">
           <a class="block transition hover:text-white" href={`tel:${footer.contact.phone.replace(/[^+\d]/g, '')}`}>
             {footer.contact.phone}
           </a>
@@ -55,12 +55,12 @@ const { footer } = Astro.props satisfies Props;
         </div>
       </div>
       <div>
-        <h4 class="text-xs font-semibold uppercase tracking-[0.25em] text-white/50">{footer.socialHeading}</h4>
+        <h4 class="text-xs font-semibold uppercase tracking-[0.25em] text-white">{footer.socialHeading}</h4>
         <ul class="mt-4 flex flex-wrap gap-3 text-sm">
           {footer.socials.map((social) => (
             <li>
               <a
-                class="rounded-full border border-white/15 px-3 py-1.5 text-white/70 transition hover:border-white/40 hover:text-white"
+                class="rounded-full border border-white/15 px-3 py-1.5 text-white transition hover:border-white/40 hover:text-white"
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -74,7 +74,7 @@ const { footer } = Astro.props satisfies Props;
     </div>
   </Container>
   <div class="border-t border-white/10">
-    <Container class="py-6 text-center text-xs uppercase tracking-[0.2em] text-white/40">
+    <Container class="py-6 text-center text-xs uppercase tracking-[0.2em] text-white">
       {footer.legal}
     </Container>
   </div>
