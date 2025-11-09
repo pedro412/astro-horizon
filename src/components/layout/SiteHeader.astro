@@ -76,11 +76,15 @@ const homeHref = locale === defaultLocale ? '/' : `/${locale}`;
           />
         </svg>
       </summary>
-      <div class="mobile-nav-overlay"></div>
-      <div class="absolute right-0 top-14 z-50 min-w-[240px] space-y-4 rounded-[26px] border border-white/20 bg-[rgba(10,18,41,0.72)] p-5 shadow-[0_35px_120px_-45px_rgba(10,132,255,0.65)] backdrop-blur-3xl">
+      <div
+        class="absolute right-0 top-14 z-50 min-w-[240px] space-y-4 rounded-[26px] border border-white/20 bg-[rgba(10,18,41,0.72)] p-5 text-white shadow-[0_35px_120px_-45px_rgba(10,132,255,0.65)] backdrop-blur-3xl [&_a:link]:text-white [&_a:visited]:text-white [&_a:hover]:text-white [&_a:focus]:text-white [&_a:focus-visible]:text-white"
+      >
         <nav class="space-y-2 text-sm font-medium text-white">
           {nav.map((item) => (
-            <a class="block rounded-xl px-3 py-2 transition hover:bg-white/10 hover:text-white" href={item.href}>
+            <a
+              class="block rounded-xl px-3 py-2 text-white transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 visited:text-white"
+              href={item.href}
+            >
               {item.label}
             </a>
           ))}
@@ -106,20 +110,3 @@ const homeHref = locale === defaultLocale ? '/' : `/${locale}`;
     </details>
   </Container>
 </header>
-
-<style>
-  details .mobile-nav-overlay {
-    display: none;
-  }
-
-  details[open] .mobile-nav-overlay {
-    position: fixed;
-    inset: 0;
-    display: block;
-    background: rgba(5, 9, 20, 0.6);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    z-index: 40;
-    pointer-events: none;
-  }
-</style>
