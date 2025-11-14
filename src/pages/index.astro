@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/sections/Hero.astro';
 import ValueSection from '../components/sections/ValueSection.astro';
 import ServicesSection from '../components/sections/ServicesSection.astro';
-import TestimonialsSection from '../components/sections/TestimonialsSection.astro';
+import SuccessStoriesSection from '../components/sections/SuccessStoriesSection.astro';
 import ContactSection from '../components/sections/ContactSection.astro';
 import { defaultLocale, getMessages, locales, type Locale } from '../i18n/config';
 import { getAlternateLinks, buildLocaleUrl } from '../i18n/utils';
@@ -26,6 +26,6 @@ const languageSwitcher = {
   <Hero hero={messages.hero} />
   <ValueSection value={messages.value} />
   <ServicesSection services={messages.services} ctaLabel={messages.contact.form.submitCta} />
-  <TestimonialsSection testimonials={messages.testimonials} />
+  <SuccessStoriesSection successStories={messages.successStories} />
   <ContactSection contact={messages.contact} phoneNumber={messages.footer.contact.phone} />
 </Layout>

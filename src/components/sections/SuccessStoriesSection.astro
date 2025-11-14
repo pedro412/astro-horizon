@@ -1,0 +1,85 @@
+---
+import Section from '../ui/Section.astro';
+import Container from '../ui/Container.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+interface Props {
+  successStories: {
+    eyebrow: string;
+    heading: string;
+    intro: string;
+    featuredProjects: { heading: string; items: string[] };
+    timeline: { heading: string; items: { year: string; description: string }[] };
+    recentProjects: { heading: string; items: { year: string; description: string }[] };
+    gallery: { src: string; alt: string }[];
+  };
+}
+
+const { successStories } = Astro.props satisfies Props;
+---
+
+<Section id="success" background="tint">
+  <Container class="space-y-14">
+    <SectionHeading
+      align="center"
+      eyebrow={successStories.eyebrow}
+      title={successStories.heading}
+      description={successStories.intro}
+    />
+    <div class="grid gap-8 lg:grid-cols-[1.1fr_1fr]">
+      <article class="h-full rounded-[26px] border border-white/15 bg-white/10 p-8 shadow-[0_35px_120px_-60px_rgba(10,132,255,0.5)] backdrop-blur-2xl">
+        <h3 class="font-display text-2xl font-semibold text-white">{successStories.featuredProjects.heading}</h3>
+        <ul class="mt-5 space-y-3 text-white">
+          {successStories.featuredProjects.items.map((item) => (
+            <li class="flex items-start gap-3">
+              <span aria-hidden="true" class="mt-2 inline-block h-2 w-2 rounded-full bg-coral-200"></span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
+      <div class="grid gap-8">
+        <article class="rounded-[26px] border border-white/15 bg-white/10 p-8 shadow-[0_35px_120px_-60px_rgba(10,132,255,0.45)] backdrop-blur-2xl">
+          <h3 class="font-display text-xl font-semibold text-white">{successStories.timeline.heading}</h3>
+          <ul class="mt-5 space-y-3 text-white">
+            {successStories.timeline.items.map((item) => (
+              <li class="flex gap-4">
+                <span class="font-display text-lg font-semibold text-coral-200">{item.year}</span>
+                <span class="text-white/90">{item.description}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+        <article class="rounded-[26px] border border-white/15 bg-white/10 p-8 shadow-[0_35px_120px_-60px_rgba(10,132,255,0.45)] backdrop-blur-2xl">
+          <h3 class="font-display text-xl font-semibold text-white">{successStories.recentProjects.heading}</h3>
+          <ul class="mt-5 space-y-3 text-white">
+            {successStories.recentProjects.items.map((item) => (
+              <li class="flex gap-4">
+                <span class="font-display text-lg font-semibold text-coral-200">{item.year}</span>
+                <span class="text-white/90">{item.description}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+      </div>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {successStories.gallery.map((media, index) => (
+        <figure
+          class={`group relative overflow-hidden rounded-[26px] border border-white/15 bg-white/5 shadow-[0_35px_120px_-60px_rgba(10,132,255,0.45)] backdrop-blur-2xl ${
+            index === 0 ? 'sm:col-span-2 lg:col-span-1' : ''
+          }`}
+        >
+          <img
+            src={media.src}
+            alt={media.alt}
+            loading="lazy"
+            decoding="async"
+            class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+          />
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#001f3f]/25 via-[#001f3f]/5 to-transparent"></div>
+        </figure>
+      ))}
+    </div>
+  </Container>
+</Section>
