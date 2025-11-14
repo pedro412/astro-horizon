@@ -2,7 +2,8 @@
 import '../styles/global.css';
 import SiteHeader from '../components/layout/SiteHeader.astro';
 import SiteFooter from '../components/layout/SiteFooter.astro';
-import type { Messages, Locale } from '../i18n/config';
+import { locales, type Messages, type Locale } from '../i18n/config';
+import { buildLocaleUrl } from '../i18n/utils';
 
 interface Props {
   locale: Locale;
@@ -15,6 +16,59 @@ interface Props {
 }
 
 const { locale, messages, alternateLinks = [], languageSwitcher } = Astro.props satisfies Props;
+
+const canonicalPath = buildLocaleUrl(locale, Astro.url);
+const canonicalUrl = new URL(canonicalPath, Astro.url.origin).toString();
+const keywords = messages.meta.keywords.join(', ');
+const sanitizedPhone = messages.footer.contact.phone.replace(/[^+\d]/g, '');
+const primaryOffice = messages.footer.offices[0];
+const socialProfiles = messages.footer.socials.map((social) => social.href).filter(Boolean);
+const localeToOg: Record<Locale, string> = { es: 'es_MX', en: 'en_US' };
+const alternateOgLocales = locales.filter((code) => code !== locale).map((code) => localeToOg[code]);
+const structuredDataObject = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: messages.meta.siteName,
+  url: canonicalUrl,
+  image: messages.meta.ogImage.src,
+  logo: new URL('/favicon.svg', Astro.url.origin).toString(),
+  description: messages.meta.description,
+  telephone: sanitizedPhone,
+  areaServed: {
+    '@type': 'Country',
+    name: 'Mexico',
+  },
+  sameAs: socialProfiles,
+  knowsLanguage: ['es', 'en'],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: messages.services.heading,
+    itemListElement: messages.services.categories.map((category) => ({
+      '@type': 'OfferCatalog',
+      name: category.title,
+      description: category.description,
+      itemListElement: category.items.map((item) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: item,
+          areaServed: 'Mexico',
+        },
+      })),
+    })),
+  },
+  ...(primaryOffice
+    ? {
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: primaryOffice.address,
+          addressLocality: primaryOffice.city,
+          addressCountry: 'MX',
+        },
+      }
+    : {}),
+};
+const structuredData = JSON.stringify(structuredDataObject, null, 2);
 ---
 
 <!doctype html>
@@ -26,6 +80,27 @@ const { locale, messages, alternateLinks = [], languageSwitcher } = Astro.props 
     <meta name="generator" content={Astro.generator} />
     <title>{messages.meta.title}</title>
     <meta name="description" content={messages.meta.description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {keywords && <meta name="keywords" content={keywords} />}
+    <meta name="robots" content="index,follow" />
+    <meta name="language" content={locale} />
+    <meta name="geo.region" content="MX" />
+    {primaryOffice && <meta name="geo.placename" content={primaryOffice.city} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={messages.meta.title} />
+    <meta property="og:description" content={messages.meta.description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={messages.meta.ogImage.src} />
+    <meta property="og:image:alt" content={messages.meta.ogImage.alt} />
+    <meta property="og:site_name" content={messages.meta.siteName} />
+    <meta property="og:locale" content={messages.meta.locale} />
+    {alternateOgLocales.map((ogLocale) => (
+      <meta property="og:locale:alternate" content={ogLocale} />
+    ))}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={messages.meta.title} />
+    <meta name="twitter:description" content={messages.meta.description} />
+    <meta name="twitter:image" content={messages.meta.ogImage.src} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -35,6 +110,7 @@ const { locale, messages, alternateLinks = [], languageSwitcher } = Astro.props 
     {alternateLinks.map((link) => (
       <link rel="alternate" hrefLang={link.lang} href={link.href} />
     ))}
+    <script type="application/ld+json" set:html={structuredData}></script>
   </head>
   <body class="relative min-h-screen">
     <SiteHeader

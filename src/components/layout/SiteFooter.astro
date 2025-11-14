@@ -11,6 +11,7 @@ interface Props {
     socialHeading: string;
     socials: { label: string; href: string }[];
     legal: string;
+    seoLinks: { label: string; href: string }[];
   };
 }
 
@@ -30,6 +31,20 @@ const { footer } = Astro.props satisfies Props;
         </div>
       </div>
       <p class="mt-6 max-w-md text-sm text-white">{footer.tagline}</p>
+      <nav aria-label="Enlaces internos" class="mt-6">
+        <ul class="flex flex-wrap gap-3 text-sm">
+          {footer.seoLinks.map((link) => (
+            <li>
+              <a
+                class="rounded-full border border-white/15 px-3 py-1.5 text-white transition hover:border-white/40 hover:text-white"
+                href={link.href}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </div>
     <div>
       <h4 class="text-xs font-semibold uppercase tracking-[0.25em] text-white">{footer.officesHeading}</h4>

@@ -4,15 +4,30 @@ export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = 'es';
 
 type NavItem = { label: string; href: string };
-type Service = { id: string; title: string; description: string; image: string };
-type Testimonial = { quote: string; name: string; role: string };
+type ImageAsset = {
+  src: string;
+  alt: string;
+};
+type ServiceCategory = {
+  id: string;
+  title: string;
+  description: string;
+  items: string[];
+  image: ImageAsset;
+};
+type TimelineEntry = { year: string; description: string };
 type SocialLink = { label: string; href: string };
+type Meta = {
+  title: string;
+  description: string;
+  keywords: string[];
+  siteName: string;
+  locale: string;
+  ogImage: ImageAsset;
+};
 
 export type Messages = {
-  meta: {
-    title: string;
-    description: string;
-  };
+  meta: Meta;
   nav: NavItem[];
   hero: {
     tag: string;
@@ -25,21 +40,29 @@ export type Messages = {
     highlightStats: { label: string; value: string }[];
   };
   value: {
+    eyebrow: string;
     heading: string;
     lead: string;
     bullets: { title: string; description: string }[];
+    gallery: ImageAsset[];
   };
   services: {
+    eyebrow: string;
     heading: string;
     intro: string;
-    items: Service[];
+    categories: ServiceCategory[];
   };
-  testimonials: {
+  successStories: {
+    eyebrow: string;
     heading: string;
     intro: string;
-    items: Testimonial[];
+    featuredProjects: { heading: string; items: string[] };
+    timeline: { heading: string; items: TimelineEntry[] };
+    recentProjects: { heading: string; items: TimelineEntry[] };
+    gallery: ImageAsset[];
   };
   contact: {
+    eyebrow: string;
     heading: string;
     subheading: string;
     form: {
@@ -64,131 +87,250 @@ export type Messages = {
     socialHeading: string;
     socials: SocialLink[];
     legal: string;
+    seoLinks: { label: string; href: string }[];
   };
 };
 
 export const messages: Record<Locale, Messages> = {
   en: {
     meta: {
-      title: 'BlueHorizon Maritime Services & Docks',
+      title: 'Blue Horizon – Maritime & Onshore Solutions',
       description:
-        'Integrated offshore logistics, port operations, and vessel support from BlueHorizon in Ciudad del Carmen and Cancún, Mexico.',
+        'Marine construction, port maintenance, industrial diving, dredging, and coastal recovery services for oil & gas and port operators across Mexico.',
+      keywords: [
+        'marine services Mexico',
+        'industrial diving Mexico',
+        'port maintenance specialists',
+        'coastal recovery and dredging',
+        'geotube installation Mexico',
+        'Blue Horizon maritime solutions',
+      ],
+      siteName: 'Blue Horizon',
+      locale: 'en_US',
+      ogImage: {
+        src: 'https://images.unsplash.com/photo-1473181488821-2d23949a045a?auto=format&fit=crop&w=1600&q=80',
+        alt: 'Marine infrastructure project with divers preparing equipment on deck',
+      },
     },
     nav: [
       { label: 'Home', href: '#hero' },
-      { label: 'Our Edge', href: '#value' },
+      { label: 'About', href: '#about' },
       { label: 'Services', href: '#services' },
-      { label: 'Success Stories', href: '#testimonials' },
+      { label: 'Success Stories', href: '#success' },
       { label: 'Contact', href: '#contact' },
     ],
     hero: {
-      tag: 'Trusted along the Gulf & Caribbean',
-      title: 'Full-spectrum maritime support for offshore excellence.',
+      tag: 'Marine & onshore experts in Mexico',
+      title: 'Blue Horizon – Maritime & Onshore Solutions',
       subtitle:
-        'From deepwater operations to fast-turn dockside service, BlueHorizon keeps your fleet mission-ready with bilingual crews, modern infrastructure, and 24/7 command centers.',
-      primaryCta: 'Schedule a strategy call',
-      secondaryCta: 'Our service playbook',
+        'Specialists in marine construction, port maintenance, industrial diving, dredging, and coastal recovery that support oil & gas, port, and civil infrastructure projects nationwide.',
+      primaryCta: 'Request a quote',
+      secondaryCta: 'Contact us',
       backgroundVideo:
         'https://cdn.coverr.co/videos/coverr-sea-port-during-sunset-1656675360835?download=1',
       backgroundFallback:
         'https://images.unsplash.com/photo-1523731407965-2430cd12f5e4?auto=format&fit=crop&w=1600&q=80',
       highlightStats: [
-        { label: 'Years in offshore logistics', value: '18+' },
-        { label: 'Average vessel uptime', value: '99.2%' },
-        { label: 'Operations managed per month', value: '120+' },
+        { label: 'Years delivering marine solutions', value: '20+' },
+        { label: 'Specialized service lines', value: '15+' },
+        { label: 'Coverage across Mexico', value: 'Gulf & Caribbean' },
       ],
     },
     value: {
-      heading: 'Precision operations designed around your mission',
+      eyebrow: 'ABOUT BLUE HORIZON',
+      heading: 'Leaders in marine maintenance, onshore services, and industrial diving in Mexico',
       lead:
-        'Our dual-port network bridges the Gulf of Mexico and the Caribbean, so your crews, cargo, and compliance move in sync.',
+        'For more than 20 years we have executed marine and onshore projects that protect people, the environment, and critical infrastructure with world-class safety protocols.',
       bullets: [
         {
-          title: 'Integrated control centers',
+          title: 'Oil & gas operations',
           description:
-            'Real-time visibility across Ciudad del Carmen and Cancún with bilingual dispatch and weather intelligence.',
+            'Support for offshore platforms, subsea assets, and coastal facilities that demand certified diving teams and resilient logistics.',
         },
         {
-          title: 'Safety-first methodology',
+          title: 'Port industry',
           description:
-            'Our ISM-certified protocols deliver impeccable HSE performance without compromising turnaround speed.',
+            'Maintenance for terminals, docks, and breakwaters, including inspections, dredging, and fabrication of fender systems.',
         },
         {
-          title: 'Custom playbooks',
+          title: 'Navigation & shipyards',
           description:
-            'Tailored SOPs for drilling, survey, and support fleets to minimize idle time and regulatory friction.',
+            'Hull cleaning, class inspections, and sonar assessments that keep fleets, shipyards, and naval infrastructure operational.',
+        },
+        {
+          title: 'Civil works',
+          description:
+            'Structural reviews, coastal recovery, and geotextile installation that reinforce public and private projects.',
+        },
+        {
+          title: 'Our philosophy',
+          description:
+            '“We protect people, the environment, and the facilities under our care. We operate with world-class safety protocols.”',
+        },
+      ],
+      gallery: [
+        {
+          src: 'https://images.unsplash.com/photo-1505739770169-1f4250a2b4cc?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Industrial divers preparing equipment on a vessel deck',
+        },
+        {
+          src: 'https://images.unsplash.com/photo-1516822003754-cca485356ecb?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Aerial view of a commercial port at sunset',
+        },
+        {
+          src: 'https://images.unsplash.com/photo-1529429617124-aee3385deae8?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Engineers surveying coastal infrastructure with digital tablet',
         },
       ],
     },
     services: {
-      heading: 'High-impact services that keep your fleet moving',
+      eyebrow: 'SERVICES',
+      heading: 'Marine, onshore, and engineering solutions',
       intro:
-        'BlueHorizon combines maritime expertise with shore-side logistics so every port call feels orchestrated.',
-      items: [
+        'Comprehensive maritime services, industrial diving, terrestrial maintenance, and specialized engineering tailored to complex coastal operations.',
+      categories: [
         {
-          id: 'harbor-operations',
-          title: 'Harbor & dock operations',
+          id: 'marine-services',
+          title: 'Marine Services & Industrial Diving',
           description:
-            'Coordinated berthing, fueling, and provisioning with on-dock maintenance crews and bonded warehousing.',
-          image:
-            'https://images.unsplash.com/photo-1505731132164-cca90383e1af?auto=format&fit=crop&w=1200&q=80',
+            'Certified divers deliver underwater inspections, marine maintenance, dredging, and coastal recovery for mission-critical assets.',
+          image: {
+            src: 'https://images.pexels.com/photos/3775155/pexels-photo-3775155.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1200',
+            alt: 'Industrial diver inspecting underwater infrastructure',
+          },
+          items: [
+            'Class inspection',
+            'Dock and vessel inspection & cleaning',
+            'Beach recovery and geotube installation',
+            'Underwater tracking, location, and salvage',
+            'Metal thickness measurements',
+            'Non-destructive testing (LP, PM, ultrasound)',
+            'Hyperbaric welding',
+            'Sacrificial anode installation and maintenance',
+            'Dredging and bathymetry',
+            'Marine structure inspection with side scan sonar',
+            'Submersible pump recovery',
+            'Concrete mattress placement (Colchacreto)',
+            'Pier fender fabrication and installation',
+          ],
         },
         {
-          id: 'offshore-logistics',
-          title: 'Offshore logistics',
+          id: 'onshore-services',
+          title: 'Onshore Services',
           description:
-            'Crew transfers, heavy-lift coordination, and supply chain management for deepwater and shallow operations.',
-          image:
-            'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80',
+            'Surface maintenance optimized for keywords such as terrestrial maintenance, steelwork, sandblasting, and hot tapping.',
+          image: {
+            src: 'https://images.pexels.com/photos/736796/pexels-photo-736796.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1200',
+            alt: 'Technician performing maintenance on industrial piping',
+          },
+          items: [
+            'Hot tapping',
+            'Installation of non-metallic sleeves',
+            'Rope access (industrial rappelling)',
+            'Welding and steel fabrication',
+            'Fuel tank cleaning',
+            'Sandblasting and industrial coating',
+            'Process line interconnection and flange work',
+            'Maintenance for elevated potable water tanks',
+          ],
         },
         {
-          id: 'compliance-services',
-          title: 'Regulatory & compliance services',
+          id: 'engineering-services',
+          title: 'Specialized Engineering',
           description:
-            'Port agency, customs clearance, and documentation handled by specialists fluent in Mexican maritime law.',
-          image:
-            'https://images.unsplash.com/photo-1531861219967-02dae2706ea8?auto=format&fit=crop&w=1200&q=80',
+            'Engineering for maritime and structural projects, including preventive and corrective strategies backed by technical field teams.',
+          image: {
+            src: 'https://images.pexels.com/photos/3862372/pexels-photo-3862372.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1200',
+            alt: 'Engineers reviewing structural plans at a coastal site',
+          },
+          items: [
+            'Analysis of maritime and onshore structures',
+            'Technical evaluation for maintenance projects',
+            'Engineering for preventive and corrective solutions',
+            'Technical field supervision and support',
+          ],
         },
       ],
     },
-    testimonials: {
-      heading: 'Voices from the bridge',
+    successStories: {
+      eyebrow: 'SUCCESS STORIES',
+      heading: 'Showcasing marine and onshore maintenance projects',
       intro:
-        'Maritime leaders across energy, survey, and cruise trust BlueHorizon with their most complex itineraries.',
-      items: [
+        'Documented experience in Mexico’s coasts with dredging, diving, structural rehabilitation, and coastal recovery.',
+      featuredProjects: {
+        heading: 'Highlighted marine and onshore maintenance projects',
+        items: [
+          'Construction, rehabilitation, and maintenance of docks',
+          'Geotube placement and beach recovery',
+          'Professional underwater inspection',
+          'Guiding drilling barriers',
+          'Foundation of marine structures',
+          'Salvage of sunken vessels',
+          'Channel dredging and coastal cleaning',
+          'Hyperbaric welding and cutting',
+          'Laying of submarine lines and cables',
+          'Industrial coating application on elevated tanks',
+        ],
+      },
+      timeline: {
+        heading: 'Documented experience by year',
+        items: [
+          { year: '2001', description: 'Strategic alliances in maritime services' },
+          { year: '2005', description: 'Dock maintenance programs' },
+          { year: '2007', description: 'Bridge maintenance projects' },
+          { year: '2008', description: 'Pipeline laying operations' },
+          { year: '2018', description: 'Breakwater construction' },
+          { year: '2020', description: 'Specialized coastal projects' },
+        ],
+      },
+      recentProjects: {
+        heading: 'Recent projects with high SEO value',
+        items: [
+          { year: '2021', description: 'Geotube placement and pile removal' },
+          { year: '2022', description: 'Subsea leak recovery and sump maintenance' },
+          { year: '2023', description: 'Painting of elevated tanks and submarine cable laying' },
+          { year: '2024', description: 'Beach recovery and channel dredging (Hotel Mayakoba)' },
+          {
+            year: '2025',
+            description: 'Beach recovery in Villa Isla Blanca, Manigua, and Cielo Lindo; maintenance of pumping systems',
+          },
+        ],
+      },
+      gallery: [
         {
-          quote:
-            'Their Cancún team mobilized a full crew change and emergency provisions in under six hours. BlueHorizon is the operational heartbeat we count on.',
-          name: 'Araceli Montoya',
-          role: 'Logistics Director, GulfStream Surveys',
+          src: 'https://images.unsplash.com/photo-1526631976502-07c0d24a79a0?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Crew installing geotextile tubes along a shoreline',
         },
         {
-          quote:
-            'From customs to quay, every stakeholder is briefed, bilingual, and accountable. Our downtime has dropped by 35% year over year.',
-          name: 'James Miller',
-          role: 'Fleet Manager, Coral Energy',
+          src: 'https://images.unsplash.com/photo-1505731722144-27faca3c0901?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Industrial divers inspecting the hull of a ship',
+        },
+        {
+          src: 'https://images.unsplash.com/photo-1581093806997-124204d9fa7b?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Excavator performing coastal dredging operations at sunset',
         },
       ],
     },
     contact: {
-      heading: 'Let’s chart your next operation',
+      eyebrow: 'CONTACT',
+      heading: 'Request a quote for marine or onshore services',
       subheading:
-        'Tell us about your vessel schedule and mission requirements. Our coordination team will respond within one business hour.',
+        'Blue Horizon provides specialized industrial diving, marine maintenance, terrestrial services, engineering, coastal recovery, and dredging. Complete the form and our team will send a tailored proposal.',
       form: {
         nameLabel: 'Full name',
         emailLabel: 'Email',
-        companyLabel: 'Company / Vessel',
-        messageLabel: 'Mission details',
-        submitCta: 'Request logistics plan',
+        companyLabel: 'Company',
+        messageLabel: 'Project requirements',
+        submitCta: 'Request a quote',
       },
       quickAction: {
-        label: 'Need an immediate answer?',
-        description: 'Ping our operations desk on WhatsApp for rapid coordination.',
+        label: 'Need immediate assistance?',
+        description: 'Contact our specialists on WhatsApp for rapid coordination.',
         whatsappCta: 'Message WhatsApp',
       },
     },
     footer: {
-      tagline: 'BlueHorizon Maritime Services & Docks — Trusted since 2006.',
+      tagline: 'Blue Horizon — Marine and onshore solutions for Mexico’s strategic infrastructure.',
       officesHeading: 'Port offices',
       offices: [
         {
@@ -211,130 +353,258 @@ export const messages: Record<Locale, Messages> = {
         { label: 'Facebook', href: 'https://www.facebook.com/bluehorizonmx/' },
         { label: 'YouTube', href: 'https://www.youtube.com/@bluehorizonmx' },
       ],
-      legal: '© 2025 BlueHorizon Maritime Services & Docks. All rights reserved.',
+      legal: '© 2025 Blue Horizon. All rights reserved.',
+      seoLinks: [
+        { label: 'Marine services', href: '#marine-services' },
+        { label: 'Marine maintenance', href: '#marine-services' },
+        { label: 'Industrial diving', href: '#marine-services' },
+        { label: 'Onshore maintenance', href: '#onshore-services' },
+        { label: 'Engineering', href: '#engineering-services' },
+        { label: 'Success stories', href: '#success' },
+        { label: 'Contact', href: '#contact' },
+        { label: 'Privacy notice', href: '/aviso-de-privacidad' },
+      ],
     },
   },
   es: {
     meta: {
-      title: 'BlueHorizon Servicios Marítimos & Muelles',
+      title: 'Blue Horizon – Soluciones Marítimas y Terrestres',
       description:
-        'Logística costa afuera, operaciones portuarias y soporte a embarcaciones desde BlueHorizon en Ciudad del Carmen y Cancún, México.',
+        'Especialistas en construcción marítima, mantenimiento de muelles, buceo industrial, dragados y recuperación de playas para la industria petrolera y portuaria en México.',
+      keywords: [
+        'servicios marítimos México',
+        'buceo industrial México',
+        'mantenimiento de muelles',
+        'dragado y batimetría',
+        'colocación de geotubos México',
+        'Blue Horizon servicios marinos',
+      ],
+      siteName: 'Blue Horizon',
+      locale: 'es_MX',
+      ogImage: {
+        src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80',
+        alt: 'Equipo marítimo mexicano realizando obras en un muelle al amanecer',
+      },
     },
     nav: [
       { label: 'Inicio', href: '#hero' },
-      { label: 'Ventaja', href: '#value' },
+      { label: 'Nosotros', href: '#about' },
       { label: 'Servicios', href: '#services' },
-      { label: 'Casos de Éxito', href: '#testimonials' },
+      { label: 'Casos de éxito', href: '#success' },
       { label: 'Contacto', href: '#contact' },
     ],
     hero: {
-      tag: 'Referentes en el Golfo y el Caribe',
-      title: 'Soporte marítimo integral para operaciones offshore.',
+      tag: 'Soluciones marítimas y terrestres',
+      title: 'Blue Horizon – Soluciones Marítimas y Terrestres',
       subtitle:
-        'Desde maniobras en aguas profundas hasta atención exprés en muelle, BlueHorizon mantiene tu flota lista con equipos bilingües, infraestructura moderna y centros de mando 24/7.',
-      primaryCta: 'Agenda una llamada estratégica',
-      secondaryCta: 'Nuestro manual de servicios',
+        'Más de 20 años brindando servicios marítimos y terrestres, incluyendo mantenimiento en muelles, inspecciones submarinas, colocación de geotubos, dragados y apoyo a la industria petrolera y portuaria en México.',
+      primaryCta: 'Solicitar cotización',
+      secondaryCta: 'Contáctanos',
       backgroundVideo:
         'https://cdn.coverr.co/videos/coverr-sea-port-during-sunset-1656675360835?download=1',
       backgroundFallback:
         'https://images.unsplash.com/photo-1523731407965-2430cd12f5e4?auto=format&fit=crop&w=1600&q=80',
       highlightStats: [
-        { label: 'Años en logística offshore', value: '18+' },
-        { label: 'Disponibilidad promedio de flota', value: '99.2%' },
-        { label: 'Operaciones coordinadas al mes', value: '120+' },
+        { label: 'Años de experiencia comprobada', value: '20+' },
+        { label: 'Servicios marinos y terrestres especializados', value: '15+' },
+        { label: 'Cobertura en México', value: 'Golfo y Caribe' },
       ],
     },
     value: {
-      heading: 'Operaciones de precisión alineadas a tu misión',
+      eyebrow: 'NOSOTROS',
+      heading: 'Líderes en mantenimiento marino, terrestre y buceo industrial en México',
       lead:
-        'Nuestra red de puertos conecta el Golfo de México con el Caribe para sincronizar tripulación, carga y cumplimiento normativo.',
+        'En Blue Horizon contamos con más de 20 años de experiencia en proyectos marinos y terrestres. Nuestro equipo especializado desarrolla inspecciones submarinas, recuperación de playas, dragados, mantenimiento a muelles y soldadura hiperbárica con estándares de seguridad de clase mundial.',
       bullets: [
         {
-          title: 'Centros de control integrados',
+          title: 'Petróleo y gas',
           description:
-            'Visibilidad en tiempo real entre Ciudad del Carmen y Cancún con despacho bilingüe y monitoreo meteorológico.',
+            'Soluciones confiables para plataformas, ductos y terminales terrestres que requieren buceo industrial y apoyo especializado.',
         },
         {
-          title: 'Metodología safety-first',
+          title: 'Industria portuaria',
           description:
-            'Protocolos certificados ISM que logran un desempeño HSE impecable sin sacrificar velocidad de respuesta.',
+            'Mantenimiento integral de muelles, defensas y estructuras marítimas con inspecciones submarinas y dragados programados.',
         },
         {
-          title: 'Playbooks a la medida',
+          title: 'Navegación y astilleros',
           description:
-            'SOPs personalizados para flotas de perforación, prospección y soporte que reducen tiempos muertos y trámites.',
+            'Servicios para embarcaciones y astilleros: limpieza de cascos, medición de espesores, pruebas no destructivas y rescate submarino.',
+        },
+        {
+          title: 'Obra civil',
+          description:
+            'Ingeniería para infraestructura costera, colocación de geotubos, recuperación de playas y cimentación de estructuras marinas.',
+        },
+        {
+          title: 'Nuestra filosofía',
+          description:
+            '“Protegemos al factor humano, al medio ambiente y a las instalaciones. Operamos con protocolos de seguridad de clase mundial.”',
+        },
+      ],
+      gallery: [
+        {
+          src: 'https://images.unsplash.com/photo-1505739770169-1f4250a2b4cc?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Equipo de buzos industriales preparando equipo en cubierta',
+        },
+        {
+          src: 'https://images.unsplash.com/photo-1516822003754-cca485356ecb?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Vista aérea de un puerto comercial al atardecer',
+        },
+        {
+          src: 'https://images.unsplash.com/photo-1529429617124-aee3385deae8?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Ingenieros revisando infraestructura costera con tablet digital',
         },
       ],
     },
     services: {
-      heading: 'Servicios clave que mantienen tu flota en movimiento',
+      eyebrow: 'SERVICIOS',
+      heading: 'Servicios marítimos, terrestres e ingeniería especializada',
       intro:
-        'BlueHorizon integra experiencia marítima con logística en tierra para que cada arribo al puerto sea impecable.',
-      items: [
+        'Optimiza tus búsquedas con servicios marítimos, buceo industrial, mantenimiento terrestre, pailería, sand blast, hot tapping e ingeniería para estructuras.',
+      categories: [
         {
-          id: 'harbor-operations',
-          title: 'Operaciones de muelle y puerto',
+          id: 'marine-services',
+          title: 'Servicios Marinos y Buceo Industrial',
           description:
-            'Coordinación de atraque, abastecimiento y provisiones con cuadrillas en muelle y almacenes fiscalizados.',
-          image:
-            'https://images.unsplash.com/photo-1505731132164-cca90383e1af?auto=format&fit=crop&w=1200&q=80',
+            'Expertos en servicios marítimos, buceo industrial e inspecciones submarinas con equipos certificados y listos para operar en todo México.',
+          image: {
+            src: 'https://images.pexels.com/photos/3775155/pexels-photo-3775155.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1200',
+            alt: 'Buzo industrial realizando labores de mantenimiento submarino',
+          },
+          items: [
+            'Inspección de clase',
+            'Inspección y limpieza de muelles y embarcaciones',
+            'Recuperación de playa e instalación de geotubos',
+            'Rastreo, localización y rescate submarino',
+            'Medición de espesores metálicos',
+            'Pruebas no destructivas (LP, PM, Ultrasonido)',
+            'Soldadura hiperbárica',
+            'Instalación y mantenimiento de ánodos de sacrificio',
+            'Dragados y batimetrías',
+            'Inspección de estructuras marinas con sonar de barrido lateral',
+            'Recuperación de bombas submarinas',
+            'Colocación de matrices (Colchacreto)',
+            'Fabricación e instalación de defensas de muelle',
+          ],
         },
         {
-          id: 'offshore-logistics',
-          title: 'Logística costa afuera',
+          id: 'onshore-services',
+          title: 'Servicios Terrestres',
           description:
-            'Transferencia de tripulaciones, coordinación de izajes y cadena de suministro para operaciones en aguas profundas y someras.',
-          image:
-            'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80',
+            'Mantenimiento terrestre optimizado para pailería, sand blast, hot tapping y acceso por cuerdas en instalaciones industriales.',
+          image: {
+            src: 'https://images.pexels.com/photos/736796/pexels-photo-736796.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1200',
+            alt: 'Técnico dando mantenimiento a una red de tuberías industriales',
+          },
+          items: [
+            'Hot Tapping',
+            'Instalación de envolventes no metálicas',
+            'Rope Access (rapel industrial)',
+            'Soldadura y pailería',
+            'Lavado de tanques de combustible',
+            'Sand blast y pintura industrial',
+            'Interconexión y embridaje de líneas de proceso',
+            'Mantenimiento de tanques elevados de agua potable',
+          ],
         },
         {
-          id: 'compliance-services',
-          title: 'Servicios regulatorios y de cumplimiento',
+          id: 'engineering-services',
+          title: 'Ingeniería Especializada',
           description:
-            'Agenciamiento portuario, despacho aduanal y trámites a cargo de especialistas en legislación marítima mexicana.',
-          image:
-            'https://images.unsplash.com/photo-1531861219967-02dae2706ea8?auto=format&fit=crop&w=1200&q=80',
+            'Ingeniería marítima y estructural con análisis de riesgo, soluciones preventivas y acompañamiento técnico en campo.',
+          image: {
+            src: 'https://images.pexels.com/photos/3862372/pexels-photo-3862372.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1200',
+            alt: 'Equipo de ingeniería analizando planos estructurales en sitio costero',
+          },
+          items: [
+            'Análisis de estructuras marítimas y terrestres',
+            'Evaluación técnica para proyectos de mantenimiento',
+            'Ingeniería para soluciones preventivas y correctivas',
+            'Acompañamiento técnico en campo',
+          ],
         },
       ],
     },
-    testimonials: {
-      heading: 'La voz del puente de mando',
+    successStories: {
+      eyebrow: 'CASOS DE ÉXITO',
+      heading: 'Proyectos destacados en mantenimiento marino y terrestre',
       intro:
-        'Líderes marítimos en energía, prospección y cruceros confían en BlueHorizon para sus itinerarios más complejos.',
-      items: [
+        'Experiencia documentada en construcción, mantenimiento marino, buceo industrial y recuperación de playas a lo largo de México.',
+      featuredProjects: {
+        heading: 'Hemos liderado y ejecutado proyectos clave como:',
+        items: [
+          'Construcción, rehabilitación y mantenimiento de muelles',
+          'Colocación de geotubos y recuperación de playas',
+          'Inspección submarina profesional',
+          'Guiado de barreras de perforación',
+          'Cimentación de estructuras marinas',
+          'Recuperación de barcos hundidos',
+          'Dragado de canales y limpieza de áreas costeras',
+          'Soldadura y corte hiperbárico',
+          'Tendido de líneas y cables submarinos',
+          'Aplicación de pintura industrial en tanques elevados',
+        ],
+      },
+      timeline: {
+        heading: 'Timeline — Experiencia documentada por año',
+        items: [
+          { year: '2001', description: 'Alianzas estratégicas en servicios marítimos' },
+          { year: '2005', description: 'Mantenimiento a muelles' },
+          { year: '2007', description: 'Mantenimiento a puentes' },
+          { year: '2008', description: 'Tendido de líneas' },
+          { year: '2018', description: 'Construcción de rompeolas' },
+          { year: '2020', description: 'Proyectos costeros especializados' },
+        ],
+      },
+      recentProjects: {
+        heading: 'Proyectos recientes con alto valor SEO',
+        items: [
+          { year: '2021', description: 'Colocación de geotubos y retiro de pilotes' },
+          { year: '2022', description: 'Recuperación de fugas submarinas y mantenimiento de cárcamos' },
+          { year: '2023', description: 'Pintura en tanques elevados y tendido de cables eléctricos submarinos' },
+          { year: '2024', description: 'Recuperación de playas y dragado de canales (Hotel Mayakoba)' },
+          {
+            year: '2025',
+            description: 'Recuperación de playa en Villa Isla Blanca, Manigua y Cielo Lindo; mantenimiento de sistemas de bombeo',
+          },
+        ],
+      },
+      gallery: [
         {
-          quote:
-            'Su equipo en Cancún coordinó cambio de tripulación y provisiones de emergencia en menos de seis horas. BlueHorizon es el pulso operativo en el que confiamos.',
-          name: 'Araceli Montoya',
-          role: 'Directora de Logística, GulfStream Surveys',
+          src: 'https://images.unsplash.com/photo-1526631976502-07c0d24a79a0?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Colocación de geotubos en una playa para recuperación costera',
         },
         {
-          quote:
-            'Del despacho a la maniobra, todos informados, bilingües y responsables. Reducimos 35% los tiempos muertos año contra año.',
-          name: 'James Miller',
-          role: 'Gerente de Flota, Coral Energy',
+          src: 'https://images.unsplash.com/photo-1505731722144-27faca3c0901?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Buzos industriales inspeccionando el casco de un barco',
+        },
+        {
+          src: 'https://images.unsplash.com/photo-1581093806997-124204d9fa7b?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Excavadora realizando labores de dragado costero al atardecer',
         },
       ],
     },
     contact: {
-      heading: 'Diseñemos tu próxima operación',
+      eyebrow: 'CONTACTO',
+      heading: 'Solicita una cotización para servicios marítimos o terrestres',
       subheading:
-        'Cuéntanos el calendario de tu embarcación y los requisitos de misión. Nuestro equipo responde en menos de una hora hábil.',
+        'En Blue Horizon ofrecemos buceo industrial, mantenimiento marino, mantenimiento terrestre, ingeniería para instalaciones marítimas y terrestres, recuperación de playas, dragados y batimetrías. Completa el formulario y te enviaremos una propuesta personalizada.',
       form: {
         nameLabel: 'Nombre completo',
         emailLabel: 'Correo electrónico',
-        companyLabel: 'Empresa / Embarcación',
-        messageLabel: 'Detalles de la misión',
-        submitCta: 'Solicitar plan logístico',
+        companyLabel: 'Empresa',
+        messageLabel: 'Requerimientos del proyecto',
+        submitCta: 'Solicitar cotización',
       },
       quickAction: {
         label: '¿Necesitas respuesta inmediata?',
-        description: 'Escríbenos por WhatsApp y coordinamos al instante.',
+        description: 'Contacta a nuestros especialistas por WhatsApp para coordinar tu proyecto.',
         whatsappCta: 'Enviar WhatsApp',
       },
     },
     footer: {
-      tagline: 'BlueHorizon Servicios Marítimos & Muelles — Confianza desde 2006.',
+      tagline: 'Blue Horizon — Servicios marítimos y terrestres que impulsan la infraestructura estratégica de México.',
       officesHeading: 'Oficinas portuarias',
       offices: [
         {
@@ -357,7 +627,17 @@ export const messages: Record<Locale, Messages> = {
         { label: 'Facebook', href: 'https://www.facebook.com/bluehorizonmx/' },
         { label: 'YouTube', href: 'https://www.youtube.com/@bluehorizonmx' },
       ],
-      legal: '© 2025 BlueHorizon Servicios Marítimos & Muelles. Todos los derechos reservados.',
+      legal: '© 2025 Blue Horizon. Todos los derechos reservados.',
+      seoLinks: [
+        { label: 'Servicios marítimos', href: '#marine-services' },
+        { label: 'Mantenimiento marino', href: '#marine-services' },
+        { label: 'Buceo industrial', href: '#marine-services' },
+        { label: 'Mantenimiento terrestre', href: '#onshore-services' },
+        { label: 'Ingeniería', href: '#engineering-services' },
+        { label: 'Casos de éxito', href: '#success' },
+        { label: 'Contacto', href: '#contact' },
+        { label: 'Aviso de privacidad', href: '/aviso-de-privacidad' },
+      ],
     },
   },
 };

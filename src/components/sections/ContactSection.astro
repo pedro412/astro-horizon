@@ -6,6 +6,7 @@ import Button from '../ui/Button.astro';
 
 interface Props {
   contact: {
+    eyebrow: string;
     heading: string;
     subheading: string;
     form: {
@@ -33,7 +34,7 @@ const whatsappHref = `https://wa.me/${phoneNumber.replace(/[^+\d]/g, '')}`;
   <Container class="grid gap-12 lg:grid-cols-[1.1fr_1fr]">
     <div>
       <SectionHeading
-        eyebrow="CONTACT"
+        eyebrow={contact.eyebrow}
         title={contact.heading}
         description={contact.subheading}
       />
