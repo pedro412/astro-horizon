@@ -13,13 +13,31 @@ interface Props {
     current: Locale;
     options: { label: string; value: Locale; href: string }[];
   };
+  pageMeta?: {
+    title?: string;
+    description?: string;
+    keywords?: string[];
+  };
+  additionalStructuredData?: Record<string, unknown>[];
 }
 
-const { locale, messages, alternateLinks = [], languageSwitcher } = Astro.props satisfies Props;
+const {
+  locale,
+  messages,
+  alternateLinks = [],
+  languageSwitcher,
+  pageMeta,
+  additionalStructuredData = [],
+} = Astro.props satisfies Props;
 
 const canonicalPath = buildLocaleUrl(locale, Astro.url);
 const canonicalUrl = new URL(canonicalPath, Astro.url.origin).toString();
-const keywords = messages.meta.keywords.join(', ');
+const meta = {
+  title: pageMeta?.title ?? messages.meta.title,
+  description: pageMeta?.description ?? messages.meta.description,
+  keywords: pageMeta?.keywords ?? messages.meta.keywords,
+};
+const keywords = meta.keywords?.join(', ');
 const sanitizedPhone = messages.footer.contact.phone.replace(/[^+\d]/g, '');
 const primaryOffice = messages.footer.offices[0];
 const socialProfiles = messages.footer.socials.map((social) => social.href).filter(Boolean);
@@ -78,8 +96,8 @@ const structuredData = JSON.stringify(structuredDataObject, null, 2);
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{messages.meta.title}</title>
-    <meta name="description" content={messages.meta.description} />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
     <link rel="canonical" href={canonicalUrl} />
     {keywords && <meta name="keywords" content={keywords} />}
     <meta name="robots" content="index,follow" />
@@ -87,8 +105,8 @@ const structuredData = JSON.stringify(structuredDataObject, null, 2);
     <meta name="geo.region" content="MX" />
     {primaryOffice && <meta name="geo.placename" content={primaryOffice.city} />}
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={messages.meta.title} />
-    <meta property="og:description" content={messages.meta.description} />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={messages.meta.ogImage.src} />
     <meta property="og:image:alt" content={messages.meta.ogImage.alt} />
@@ -98,8 +116,8 @@ const structuredData = JSON.stringify(structuredDataObject, null, 2);
       <meta property="og:locale:alternate" content={ogLocale} />
     ))}
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={messages.meta.title} />
-    <meta name="twitter:description" content={messages.meta.description} />
+    <meta name="twitter:title" content={meta.title} />
+    <meta name="twitter:description" content={meta.description} />
     <meta name="twitter:image" content={messages.meta.ogImage.src} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -111,6 +129,9 @@ const structuredData = JSON.stringify(structuredDataObject, null, 2);
       <link rel="alternate" hrefLang={link.lang} href={link.href} />
     ))}
     <script type="application/ld+json" set:html={structuredData}></script>
+    {additionalStructuredData.map((data) => (
+      <script type="application/ld+json" set:html={JSON.stringify(data, null, 2)}></script>
+    ))}
   </head>
   <body class="relative min-h-screen">
     <SiteHeader

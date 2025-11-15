@@ -25,6 +25,7 @@ const { hero } = Astro.props satisfies Props;
       <img
         src={hero.backgroundFallback}
         alt=""
+        aria-hidden="true"
         class="h-full w-full object-cover opacity-30"
         loading="lazy"
       />
@@ -37,6 +38,7 @@ const { hero } = Astro.props satisfies Props;
       loop
       playsinline
       poster={hero.backgroundFallback}
+      aria-hidden="true"
     ></video>
     <div class="absolute inset-0 bg-hero-overlay"></div>
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(100,210,255,0.22),transparent_55%)] mix-blend-screen"></div>
@@ -54,7 +56,7 @@ const { hero } = Astro.props satisfies Props;
         <Button variant="primary" size="lg" href="#contact">
           {hero.primaryCta}
         </Button>
-        <Button variant="secondary" size="lg" href="#services">
+        <Button variant="secondary" size="lg" href="#contact">
           {hero.secondaryCta}
         </Button>
       </div>

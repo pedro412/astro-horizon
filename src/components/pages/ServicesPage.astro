@@ -1,0 +1,133 @@
+---
+import Container from '../ui/Container.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import Button from '../ui/Button.astro';
+import type { Messages } from '../../i18n/config';
+import type { ServicesPageCopy } from '../../data/pages';
+
+interface Props {
+  services: Messages['services'];
+  contact: Messages['contact'];
+  footerContact: Messages['footer']['contact'];
+  copy: ServicesPageCopy;
+  successStoriesHref: string;
+  contactHref: string;
+}
+
+const { services, contact, footerContact, copy, successStoriesHref, contactHref } = Astro.props satisfies Props;
+const sanitizedPhone = footerContact.phone.replace(/[^+\d]/g, '');
+---
+
+<section class="relative overflow-hidden border-b border-white/10 bg-[rgba(5,9,20,0.9)] pb-10 pt-28 text-white">
+  <Container class="space-y-10">
+    <div class="space-y-5">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-white/70">{copy.hero.eyebrow}</p>
+      <h1 class="font-display text-4xl font-semibold leading-tight sm:text-5xl">
+        <span class="text-gradient">{copy.hero.title}</span>
+      </h1>
+      <p class="text-base text-white/90 sm:text-lg">{copy.hero.description}</p>
+    </div>
+    <div class="grid gap-6 lg:grid-cols-[2fr_1fr]">
+      <div class="space-y-4 rounded-[28px] border border-white/15 bg-white/5 p-6 backdrop-blur-2xl">
+        {copy.hero.supportingPoints.map((point) => (
+          <div class="rounded-2xl bg-white/5 p-4">
+            <p class="font-semibold text-white">{point.title}</p>
+            <p class="text-sm text-white/75">{point.description}</p>
+          </div>
+        ))}
+      </div>
+      <div class="rounded-[28px] border border-white/15 bg-white/5 p-6 backdrop-blur-2xl">
+        <p class="text-sm text-white/70">{services.intro}</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <Button variant="primary" size="lg" href={contactHref}>
+            {copy.hero.primaryCta}
+          </Button>
+          <Button variant="secondary" size="lg" href={successStoriesHref}>
+            {copy.hero.secondaryCta}
+          </Button>
+        </div>
+      </div>
+    </div>
+    <div class="grid gap-6 sm:grid-cols-3">
+      {copy.stats.map((stat) => (
+        <div class="rounded-[24px] border border-white/15 bg-white/5 p-6 text-center">
+          <p class="font-display text-3xl font-semibold text-white">{stat.value}</p>
+          <p class="text-xs uppercase tracking-[0.2em] text-white/70">{stat.label}</p>
+          <p class="mt-2 text-sm text-white/70">{stat.description}</p>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>
+
+<section class="py-16">
+  <Container class="space-y-12">
+    <SectionHeading eyebrow={services.eyebrow} title={services.heading} description={services.intro} />
+    <div class="grid gap-8">
+      {services.categories.map((category) => (
+        <article id={category.id} class="grid gap-6 rounded-[32px] border border-white/15 bg-white/5 p-6 lg:grid-cols-2">
+          <div class="space-y-4">
+            <p class="text-xs uppercase tracking-[0.3em] text-white/60">{copy.hero.eyebrow}</p>
+            <h2 class="font-display text-3xl text-white">{category.title}</h2>
+            <p class="text-white/80">{category.description}</p>
+            <ul class="grid gap-2 text-sm text-white/80">
+              {category.items.map((item) => (
+                <li class="flex items-start gap-2">
+                  <span aria-hidden="true" class="mt-1 h-1.5 w-1.5 rounded-full bg-[#0A84FF]"></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="space-y-4 rounded-[28px] bg-white/5 p-4">
+            <img
+              src={category.image.src}
+              alt={category.image.alt}
+              loading="lazy"
+              decoding="async"
+              class="h-64 w-full rounded-2xl object-cover"
+              width="640"
+              height="360"
+            />
+          </div>
+        </article>
+      ))}
+    </div>
+  </Container>
+</section>
+
+<section class="py-12">
+  <Container class="grid gap-6 md:grid-cols-2">
+    {copy.faq.map((item) => (
+      <details class="rounded-2xl border border-white/15 bg-white/5 p-5">
+        <summary class="cursor-pointer list-none font-semibold text-white">
+          {item.question}
+        </summary>
+        <p class="mt-3 text-sm text-white/75">{item.answer}</p>
+      </details>
+    ))}
+  </Container>
+</section>
+
+<section class="py-16">
+  <Container class="rounded-[32px] border border-white/15 bg-gradient-to-r from-[#0B1F33] to-[#13385E] p-10 text-white">
+    <div class="space-y-4">
+      <p class="text-xs uppercase tracking-[0.3em] text-white/70">{contact.eyebrow}</p>
+      <h2 class="font-display text-3xl">{copy.cta.heading}</h2>
+      <p class="text-white/80">{copy.cta.description}</p>
+      <div class="flex flex-wrap gap-3">
+        <Button variant="primary" size="lg" href={contactHref}>
+          {copy.cta.button}
+        </Button>
+      </div>
+      <div class="flex flex-wrap gap-6 text-sm text-white/75">
+        <a href={`tel:${sanitizedPhone}`} class="hover:text-white">
+          {footerContact.phone}
+        </a>
+        <a href={`mailto:${footerContact.email}`} class="hover:text-white">
+          {footerContact.email}
+        </a>
+      </div>
+    </div>
+  </Container>
+</section>
