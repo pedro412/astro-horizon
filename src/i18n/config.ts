@@ -1,3 +1,14 @@
+import type { ImageMetadata } from 'astro';
+import buzo1 from '../assets/buzo1.jpeg';
+import buzo2 from '../assets/buzo2.jpeg';
+import buzo3 from '../assets/buzo3.jpeg';
+import geo1 from '../assets/geo1.jpg';
+import geo2 from '../assets/geo2.jpg';
+import geo3 from '../assets/geo3.jpg';
+import service1 from '../assets/service1.jpeg';
+import service2 from '../assets/service2.jpeg';
+import service3 from '../assets/service3.jpeg';
+
 export const locales = ['es', 'en'] as const;
 export type Locale = (typeof locales)[number];
 
@@ -5,7 +16,7 @@ export const defaultLocale: Locale = 'es';
 
 type NavItem = { label: string; href: string };
 type ImageAsset = {
-  src: string;
+  src: string | ImageMetadata;
   alt: string;
 };
 type ServiceCategory = {
@@ -170,15 +181,15 @@ export const messages: Record<Locale, Messages> = {
       ],
       gallery: [
         {
-          src: 'https://images.unsplash.com/photo-1505739770169-1f4250a2b4cc?auto=format&fit=crop&w=1200&q=80',
+          src: service1.src,
           alt: 'Industrial divers preparing equipment on a vessel deck',
         },
         {
-          src: 'https://images.unsplash.com/photo-1516822003754-cca485356ecb?auto=format&fit=crop&w=1200&q=80',
+          src: service2.src,
           alt: 'Aerial view of a commercial port at sunset',
         },
         {
-          src: 'https://images.unsplash.com/photo-1529429617124-aee3385deae8?auto=format&fit=crop&w=1200&q=80',
+          src: buzo2.src,
           alt: 'Engineers surveying coastal infrastructure with digital tablet',
         },
       ],
@@ -195,8 +206,8 @@ export const messages: Record<Locale, Messages> = {
           description:
             'Certified divers deliver underwater inspections, marine maintenance, dredging, and coastal recovery for mission-critical assets.',
           image: {
-            src: 'https://images.pexels.com/photos/3775155/pexels-photo-3775155.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1200',
-            alt: 'Industrial diver inspecting underwater infrastructure',
+            src: buzo1.src,
+            alt: 'Industrial divers preparing equipment alongside a marine platform',
           },
           items: [
             'Class inspection',
@@ -220,8 +231,8 @@ export const messages: Record<Locale, Messages> = {
           description:
             'Surface maintenance optimized for keywords such as terrestrial maintenance, steelwork, sandblasting, and hot tapping.',
           image: {
-            src: 'https://images.pexels.com/photos/736796/pexels-photo-736796.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1200',
-            alt: 'Technician performing maintenance on industrial piping',
+            src: service3.src,
+            alt: 'Onshore maintenance team guiding heavy machinery near the coastline',
           },
           items: [
             'Hot tapping',
@@ -240,8 +251,8 @@ export const messages: Record<Locale, Messages> = {
           description:
             'Engineering for maritime and structural projects, including preventive and corrective strategies backed by technical field teams.',
           image: {
-            src: 'https://images.pexels.com/photos/3862372/pexels-photo-3862372.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1200',
-            alt: 'Engineers reviewing structural plans at a coastal site',
+            src: buzo3.src,
+            alt: 'Engineers inspecting marine infrastructure plans on site',
           },
           items: [
             'Analysis of maritime and onshore structures',
@@ -298,16 +309,16 @@ export const messages: Record<Locale, Messages> = {
       },
       gallery: [
         {
-          src: 'https://images.unsplash.com/photo-1526631976502-07c0d24a79a0?auto=format&fit=crop&w=1200&q=80',
-          alt: 'Crew installing geotextile tubes along a shoreline',
+          src: geo1.src,
+          alt: 'Geotube installation along a Mexican shoreline',
         },
         {
-          src: 'https://images.unsplash.com/photo-1505731722144-27faca3c0901?auto=format&fit=crop&w=1200&q=80',
-          alt: 'Industrial divers inspecting the hull of a ship',
+          src: geo2.src,
+          alt: 'Industrial divers coordinating maintenance near a pier',
         },
         {
-          src: 'https://images.unsplash.com/photo-1581093806997-124204d9fa7b?auto=format&fit=crop&w=1200&q=80',
-          alt: 'Excavator performing coastal dredging operations at sunset',
+          src: geo3.src,
+          alt: 'Excavator working on coastal dredging operations at dusk',
         },
       ],
     },
@@ -443,15 +454,15 @@ export const messages: Record<Locale, Messages> = {
       ],
       gallery: [
         {
-          src: 'https://images.unsplash.com/photo-1505739770169-1f4250a2b4cc?auto=format&fit=crop&w=1200&q=80',
+          src: service1.src,
           alt: 'Equipo de buzos industriales preparando equipo en cubierta',
         },
         {
-          src: 'https://images.unsplash.com/photo-1516822003754-cca485356ecb?auto=format&fit=crop&w=1200&q=80',
+          src: service2.src,
           alt: 'Vista aérea de un puerto comercial al atardecer',
         },
         {
-          src: 'https://images.unsplash.com/photo-1529429617124-aee3385deae8?auto=format&fit=crop&w=1200&q=80',
+          src: buzo2.src,
           alt: 'Ingenieros revisando infraestructura costera con tablet digital',
         },
       ],
@@ -468,8 +479,8 @@ export const messages: Record<Locale, Messages> = {
           description:
             'Expertos en servicios marítimos, buceo industrial e inspecciones submarinas con equipos certificados y listos para operar en todo México.',
           image: {
-            src: 'https://images.pexels.com/photos/3775155/pexels-photo-3775155.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1200',
-            alt: 'Buzo industrial realizando labores de mantenimiento submarino',
+            src: buzo1.src,
+            alt: 'Buzos industriales preparando equipo en plataforma marina',
           },
           items: [
             'Inspección de clase',
@@ -493,8 +504,8 @@ export const messages: Record<Locale, Messages> = {
           description:
             'Mantenimiento terrestre optimizado para pailería, sand blast, hot tapping y acceso por cuerdas en instalaciones industriales.',
           image: {
-            src: 'https://images.pexels.com/photos/736796/pexels-photo-736796.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1200',
-            alt: 'Técnico dando mantenimiento a una red de tuberías industriales',
+            src: service3.src,
+            alt: 'Cuadrilla de mantenimiento terrestre operando maquinaria cerca de la costa',
           },
           items: [
             'Hot Tapping',
@@ -513,8 +524,8 @@ export const messages: Record<Locale, Messages> = {
           description:
             'Ingeniería marítima y estructural con análisis de riesgo, soluciones preventivas y acompañamiento técnico en campo.',
           image: {
-            src: 'https://images.pexels.com/photos/3862372/pexels-photo-3862372.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1200',
-            alt: 'Equipo de ingeniería analizando planos estructurales en sitio costero',
+            src: buzo3.src,
+            alt: 'Equipo de ingeniería revisando planos de infraestructura marina en sitio',
           },
           items: [
             'Análisis de estructuras marítimas y terrestres',
@@ -571,15 +582,15 @@ export const messages: Record<Locale, Messages> = {
       },
       gallery: [
         {
-          src: 'https://images.unsplash.com/photo-1526631976502-07c0d24a79a0?auto=format&fit=crop&w=1200&q=80',
+          src: geo1.src,
           alt: 'Colocación de geotubos en una playa para recuperación costera',
         },
         {
-          src: 'https://images.unsplash.com/photo-1505731722144-27faca3c0901?auto=format&fit=crop&w=1200&q=80',
+          src: geo2.src,
           alt: 'Buzos industriales inspeccionando el casco de un barco',
         },
         {
-          src: 'https://images.unsplash.com/photo-1581093806997-124204d9fa7b?auto=format&fit=crop&w=1200&q=80',
+          src: geo3.src,
           alt: 'Excavadora realizando labores de dragado costero al atardecer',
         },
       ],

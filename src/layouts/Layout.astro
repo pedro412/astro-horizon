@@ -40,15 +40,21 @@ const meta = {
 const keywords = meta.keywords?.join(', ');
 const sanitizedPhone = messages.footer.contact.phone.replace(/[^+\d]/g, '');
 const primaryOffice = messages.footer.offices[0];
-const socialProfiles = messages.footer.socials.map((social) => social.href).filter(Boolean);
+const socialProfiles = messages.footer.socials
+  .map((social) => social.href)
+  .filter(Boolean);
 const localeToOg: Record<Locale, string> = { es: 'es_MX', en: 'en_US' };
-const alternateOgLocales = locales.filter((code) => code !== locale).map((code) => localeToOg[code]);
+const alternateOgLocales = locales
+  .filter((code) => code !== locale)
+  .map((code) => localeToOg[code]);
+const ogImageSrc =
+  typeof messages.meta.ogImage.src === 'string' ? messages.meta.ogImage.src : messages.meta.ogImage.src.src;
 const structuredDataObject = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   name: messages.meta.siteName,
   url: canonicalUrl,
-  image: messages.meta.ogImage.src,
+  image: ogImageSrc,
   logo: new URL('/favicon.svg', Astro.url.origin).toString(),
   description: messages.meta.description,
   telephone: sanitizedPhone,
@@ -78,10 +84,10 @@ const structuredDataObject = {
   ...(primaryOffice
     ? {
         address: {
-          '@type': 'PostalAddress',
+          "@type": "PostalAddress",
           streetAddress: primaryOffice.address,
           addressLocality: primaryOffice.city,
-          addressCountry: 'MX',
+          addressCountry: "MX",
         },
       }
     : {}),
@@ -103,22 +109,28 @@ const structuredData = JSON.stringify(structuredDataObject, null, 2);
     <meta name="robots" content="index,follow" />
     <meta name="language" content={locale} />
     <meta name="geo.region" content="MX" />
-    {primaryOffice && <meta name="geo.placename" content={primaryOffice.city} />}
+    {
+      primaryOffice && (
+        <meta name="geo.placename" content={primaryOffice.city} />
+      )
+    }
     <meta property="og:type" content="website" />
     <meta property="og:title" content={meta.title} />
     <meta property="og:description" content={meta.description} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={messages.meta.ogImage.src} />
+    <meta property="og:image" content={ogImageSrc} />
     <meta property="og:image:alt" content={messages.meta.ogImage.alt} />
     <meta property="og:site_name" content={messages.meta.siteName} />
     <meta property="og:locale" content={messages.meta.locale} />
-    {alternateOgLocales.map((ogLocale) => (
-      <meta property="og:locale:alternate" content={ogLocale} />
-    ))}
+    {
+      alternateOgLocales.map((ogLocale) => (
+        <meta property="og:locale:alternate" content={ogLocale} />
+      ))
+    }
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={meta.title} />
     <meta name="twitter:description" content={meta.description} />
-    <meta name="twitter:image" content={messages.meta.ogImage.src} />
+    <meta name="twitter:image" content={ogImageSrc} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -126,11 +138,14 @@ const structuredData = JSON.stringify(structuredDataObject, null, 2);
       rel="stylesheet"
     />
     {alternateLinks.map((link) => (
-      <link rel="alternate" hrefLang={link.lang} href={link.href} />
+      <link rel="alternate" hreflang={link.lang} href={link.href} />
     ))}
     <script type="application/ld+json" set:html={structuredData}></script>
     {additionalStructuredData.map((data) => (
-      <script type="application/ld+json" set:html={JSON.stringify(data, null, 2)}></script>
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify(data, null, 2)}
+      ></script>
     ))}
   </head>
   <body class="relative min-h-screen">
@@ -140,7 +155,7 @@ const structuredData = JSON.stringify(structuredDataObject, null, 2);
       contactCta={messages.contact.form.submitCta}
       languageSwitcher={languageSwitcher}
     />
-    <main class="relative min-h-screen overflow-hidden pt-24 sm:pt-28">
+    <main class="relative min-h-screen overflow-hidden pt-20 sm:pt-20">
       <slot />
     </main>
     <SiteFooter footer={messages.footer} />
