@@ -1,0 +1,46 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image: {
+    src: string;
+    alt: string;
+  };
+}
+
+const { title, description, image } = Astro.props satisfies Props;
+---
+
+<article
+  class="group relative flex min-h-[320px] flex-col justify-end overflow-hidden rounded-[34px] border border-white/15 bg-white/5 shadow-[0_45px_140px_-60px_rgba(10,132,255,0.55)] transition duration-500 hover:border-white/25"
+>
+  <img
+    src={image.src}
+    alt={image.alt}
+    loading="lazy"
+    decoding="async"
+    class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+  />
+  <div
+    class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#001f3f]/5 via-[#00111f]/30 to-[#000a17]/80"
+  >
+  </div>
+  <div class="relative z-10 px-6 pt-6 pb-2 text-white sm:px-5 sm:pt-5">
+    <h3
+      class="font-display text-2xl font-semibold drop-shadow-[0_5px_25px_rgba(0,0,0,0.65)]"
+    >
+      {title}
+    </h3>
+  </div>
+  <div
+    class="relative z-10 w-full px-5 py-4 text-white backdrop-blur-2xl sm:px-6 sm:py-5"
+  >
+    <p class="text-xs text-white/85 sm:text-sm">
+      {description}
+    </p>
+  </div>
+  <div
+    class="pointer-events-none absolute -left-16 top-8 h-44 w-44 rounded-full bg-coral-200/20 blur-3xl transition duration-700 group-hover:opacity-70"
+  >
+  </div>
+</article>

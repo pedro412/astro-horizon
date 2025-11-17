@@ -54,8 +54,11 @@ export type Messages = {
     eyebrow: string;
     heading: string;
     lead: string;
-    bullets: { title: string; description: string }[];
-    gallery: ImageAsset[];
+    cards: {
+      title: string;
+      description: string;
+      image: ImageAsset;
+    }[];
   };
   services: {
     eyebrow: string;
@@ -152,45 +155,51 @@ export const messages: Record<Locale, Messages> = {
       heading: 'Leaders in marine maintenance, onshore services, and industrial diving in Mexico',
       lead:
         'For more than 20 years we have executed marine and onshore projects that protect people, the environment, and critical infrastructure with world-class safety protocols.',
-      bullets: [
+      cards: [
         {
           title: 'Oil & gas operations',
           description:
             'Support for offshore platforms, subsea assets, and coastal facilities that demand certified diving teams and resilient logistics.',
+          image: {
+            src: service1.src,
+            alt: 'Industrial divers preparing equipment on a vessel deck',
+          },
         },
         {
           title: 'Port industry',
           description:
             'Maintenance for terminals, docks, and breakwaters, including inspections, dredging, and fabrication of fender systems.',
+          image: {
+            src: service2.src,
+            alt: 'Aerial view of a commercial port at sunset',
+          },
         },
         {
           title: 'Navigation & shipyards',
           description:
             'Hull cleaning, class inspections, and sonar assessments that keep fleets, shipyards, and naval infrastructure operational.',
+          image: {
+            src: buzo2.src,
+            alt: 'Engineers surveying coastal infrastructure with digital tablet',
+          },
         },
         {
           title: 'Civil works',
           description:
             'Structural reviews, coastal recovery, and geotextile installation that reinforce public and private projects.',
+          image: {
+            src: geo1.src,
+            alt: 'Geotube installation along a Mexican shoreline',
+          },
         },
         {
           title: 'Our philosophy',
           description:
             '“We protect people, the environment, and the facilities under our care. We operate with world-class safety protocols.”',
-        },
-      ],
-      gallery: [
-        {
-          src: service1.src,
-          alt: 'Industrial divers preparing equipment on a vessel deck',
-        },
-        {
-          src: service2.src,
-          alt: 'Aerial view of a commercial port at sunset',
-        },
-        {
-          src: buzo2.src,
-          alt: 'Engineers surveying coastal infrastructure with digital tablet',
+          image: {
+            src: geo2.src,
+            alt: 'Industrial divers coordinating maintenance near a pier',
+          },
         },
       ],
     },
@@ -425,45 +434,51 @@ export const messages: Record<Locale, Messages> = {
       heading: 'Líderes en mantenimiento marino, terrestre y buceo industrial en México',
       lead:
         'En Blue Horizon contamos con más de 20 años de experiencia en proyectos marinos y terrestres. Nuestro equipo especializado desarrolla inspecciones submarinas, recuperación de playas, dragados, mantenimiento a muelles y soldadura hiperbárica con estándares de seguridad de clase mundial.',
-      bullets: [
+      cards: [
         {
           title: 'Petróleo y gas',
           description:
             'Soluciones confiables para plataformas, ductos y terminales terrestres que requieren buceo industrial y apoyo especializado.',
+          image: {
+            src: service1.src,
+            alt: 'Equipo de buzos industriales preparando equipo en cubierta',
+          },
         },
         {
           title: 'Industria portuaria',
           description:
             'Mantenimiento integral de muelles, defensas y estructuras marítimas con inspecciones submarinas y dragados programados.',
+          image: {
+            src: service2.src,
+            alt: 'Vista aérea de un puerto comercial al atardecer',
+          },
         },
         {
           title: 'Navegación y astilleros',
           description:
             'Servicios para embarcaciones y astilleros: limpieza de cascos, medición de espesores, pruebas no destructivas y rescate submarino.',
+          image: {
+            src: buzo2.src,
+            alt: 'Ingenieros revisando infraestructura costera con tablet digital',
+          },
         },
         {
           title: 'Obra civil',
           description:
             'Ingeniería para infraestructura costera, colocación de geotubos, recuperación de playas y cimentación de estructuras marinas.',
+          image: {
+            src: geo1.src,
+            alt: 'Colocación de geotubos en una playa para recuperación costera',
+          },
         },
         {
           title: 'Nuestra filosofía',
           description:
             '“Protegemos al factor humano, al medio ambiente y a las instalaciones. Operamos con protocolos de seguridad de clase mundial.”',
-        },
-      ],
-      gallery: [
-        {
-          src: service1.src,
-          alt: 'Equipo de buzos industriales preparando equipo en cubierta',
-        },
-        {
-          src: service2.src,
-          alt: 'Vista aérea de un puerto comercial al atardecer',
-        },
-        {
-          src: buzo2.src,
-          alt: 'Ingenieros revisando infraestructura costera con tablet digital',
+          image: {
+            src: geo2.src,
+            alt: 'Buzos industriales inspeccionando el casco de un barco',
+          },
         },
       ],
     },

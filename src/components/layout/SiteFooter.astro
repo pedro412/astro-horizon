@@ -1,5 +1,6 @@
 ---
 import Container from '../ui/Container.astro';
+import logo from '../../assets/bluehorizon-logo.png';
 
 interface Props {
   footer: {
@@ -22,12 +23,18 @@ const { footer } = Astro.props satisfies Props;
   <Container class="grid gap-12 py-16 md:grid-cols-4">
     <div class="md:col-span-2">
       <div class="flex items-center gap-4">
-        <div class="flex h-11 w-11 items-center justify-center rounded-full bg-[#0A84FF] font-display text-xl font-semibold text-white shadow-[0_15px_40px_-20px_rgba(10,132,255,0.8)]">
-          BH
+        <div class="flex h-11 w-11 items-center justify-center rounded-full bg-white/5">
+          <img
+            src={logo.src}
+            alt="Blue Horizon logo"
+            class="h-full w-full object-contain"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
-        <div>
-          <p class="font-display text-xl font-semibold text-white">BlueHorizon</p>
-          <p class="text-xs uppercase tracking-[0.25em] text-white">Maritime &amp; Docks</p>
+        <div class="leading-tight">
+          <p class="font-display text-xl font-semibold text-white">Blue Horizon</p>
+          <p class="text-xs uppercase tracking-[0.25em] text-white/80">Maritime &amp; Docks</p>
         </div>
       </div>
       <p class="mt-6 max-w-md text-sm text-white">{footer.tagline}</p>
