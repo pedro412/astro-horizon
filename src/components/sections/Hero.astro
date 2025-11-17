@@ -1,7 +1,7 @@
 ---
-import Button from '../ui/Button.astro';
-import Container from '../ui/Container.astro';
-import heroBackground from '../../assets/hero1.jpg';
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
+import heroBackground from "../../assets/hero1.jpg";
 
 interface Props {
   hero: {
@@ -20,7 +20,10 @@ const { hero } = Astro.props satisfies Props;
 const fallbackImage = heroBackground?.src ?? hero.backgroundFallback;
 ---
 
-<section id="hero" class="relative isolate flex min-h-[85vh] items-center overflow-hidden text-white">
+<section
+  id="hero"
+  class="relative isolate flex min-h-[85vh] items-center overflow-hidden text-white"
+>
   <div aria-hidden="true" class="absolute inset-0">
     <picture>
       <source srcset={fallbackImage} />
@@ -40,17 +43,26 @@ const fallbackImage = heroBackground?.src ?? hero.backgroundFallback;
       loop
       playsinline
       poster={fallbackImage}
-      aria-hidden="true"
-    ></video>
+      aria-hidden="true"></video>
     <div class="absolute inset-0 bg-hero-overlay opacity-80"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(100,210,255,0.22),transparent_55%)] mix-blend-screen"></div>
+    <div
+      class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(100,210,255,0.22),transparent_55%)] mix-blend-screen"
+    >
+    </div>
   </div>
-  <Container class="relative z-10 flex flex-col items-center gap-12 text-center">
+  <Container
+    id="container"
+    class="relative z-10 flex flex-col items-center gap-12 pt-5 text-center sm:pt-0"
+  >
     <div class="max-w-3xl space-y-6">
-      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-white/90">
+      <p
+        class="text-xs font-semibold uppercase tracking-[0.25em] text-white/90"
+      >
         {hero.tag}
       </p>
-      <h1 class="font-display text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
+      <h1
+        class="font-display text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl"
+      >
         <span class="text-gradient">{hero.title}</span>
       </h1>
       <p class="text-base text-white/90 sm:text-lg">{hero.subtitle}</p>
@@ -63,13 +75,21 @@ const fallbackImage = heroBackground?.src ?? hero.backgroundFallback;
         </Button>
       </div>
     </div>
-    <div class="grid w-full gap-6 rounded-[28px] border border-white/20 bg-white/10 p-6 text-center backdrop-blur-2xl sm:grid-cols-3 sm:p-8">
-      {hero.highlightStats.map((stat) => (
-        <div class="space-y-1">
-          <p class="font-display text-3xl font-semibold text-white sm:text-4xl">{stat.value}</p>
-          <p class="text-xs uppercase tracking-[0.2em] text-white">{stat.label}</p>
-        </div>
-      ))}
+    <div
+      class="grid w-full gap-6 rounded-[28px] border border-white/20 bg-white/10 p-6 text-center backdrop-blur-2xl sm:grid-cols-3 sm:p-8"
+    >
+      {
+        hero.highlightStats.map((stat) => (
+          <div class="space-y-1">
+            <p class="font-display text-3xl font-semibold text-white sm:text-4xl">
+              {stat.value}
+            </p>
+            <p class="text-xs uppercase tracking-[0.2em] text-white">
+              {stat.label}
+            </p>
+          </div>
+        ))
+      }
     </div>
   </Container>
 </section>

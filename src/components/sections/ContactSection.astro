@@ -39,7 +39,7 @@ const whatsappHref = `https://wa.me/${phoneNumber.replace(/[^+\d]/g, '')}`;
         description={contact.subheading}
       />
       <div
-        class="relative mt-10 overflow-hidden rounded-[28px] border border-white/20 bg-white/10 p-8 backdrop-blur-2xl"
+        class="relative mt-10 overflow-hidden rounded-[28px] border border-white/20 bg-[rgba(0,0,0,0)] p-8 backdrop-blur-2xl"
       >
         <form class="grid gap-6">
           <label class="block">
@@ -90,7 +90,7 @@ const whatsappHref = `https://wa.me/${phoneNumber.replace(/[^+\d]/g, '')}`;
         </form>
       </div>
     </div>
-    <aside class="relative flex flex-col justify-center gap-6 overflow-hidden rounded-[28px] border border-white/20 bg-white/10 p-10 text-white backdrop-blur-2xl">
+    <aside class="relative flex flex-col justify-center gap-6 overflow-hidden rounded-[28px] border border-white/20 bg-[rgba(0,0,0,0)] p-10 text-white backdrop-blur-2xl">
       <p class="text-xs font-semibold uppercase tracking-[0.25em] text-white">{contact.quickAction.label}</p>
       <p class="text-2xl font-display font-semibold leading-snug text-white">
         {contact.quickAction.description}
