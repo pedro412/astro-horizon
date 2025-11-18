@@ -355,22 +355,18 @@ export const messages: Record<Locale, Messages> = {
       offices: [
         {
           city: 'Ciudad del Carmen',
-          address: 'Av. 31 #124, Zona Industrial Laguna Azul, 24140 Campeche',
-        },
-        {
-          city: 'Cancún',
-          address: 'Terminal Marítima, Blvd. Kukulcán Km 4, Zona Hotelera, 77500 Quintana Roo',
+          address: 'C. 50 3, Aviación, 24170 Cdad. del Carmen, Camp.',
         },
       ],
       contactHeading: 'Contact',
       contact: {
-        phone: '+52 938 444 2100',
-        email: 'ops@bluehorizon.mx',
+        phone: '938 133 0463',
+        email: 'gerencia@bluehorizonmexico.com',
       },
       socialHeading: 'Follow us',
       socials: [
         { label: 'LinkedIn', href: 'https://www.linkedin.com/company/bluehorizon-mx/' },
-        { label: 'Facebook', href: 'https://www.facebook.com/bluehorizonmx/' },
+        { label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61583442551000' },
         { label: 'YouTube', href: 'https://www.youtube.com/@bluehorizonmx' },
       ],
       legal: '© 2025 Blue Horizon. All rights reserved.',
@@ -634,22 +630,18 @@ export const messages: Record<Locale, Messages> = {
       offices: [
         {
           city: 'Ciudad del Carmen',
-          address: 'Av. 31 #124, Zona Industrial Laguna Azul, 24140 Campeche',
-        },
-        {
-          city: 'Cancún',
-          address: 'Terminal Marítima, Blvd. Kukulcán Km 4, Zona Hotelera, 77500 Quintana Roo',
+          address: 'C. 50 3, Aviación, 24170 Cdad. del Carmen, Camp.',
         },
       ],
       contactHeading: 'Contacto',
       contact: {
-        phone: '+52 938 444 2100',
-        email: 'ops@bluehorizon.mx',
+        phone: '938 133 0463',
+        email: 'gerencia@bluehorizonmexico.com',
       },
       socialHeading: 'Redes sociales',
       socials: [
         { label: 'LinkedIn', href: 'https://www.linkedin.com/company/bluehorizon-mx/' },
-        { label: 'Facebook', href: 'https://www.facebook.com/bluehorizonmx/' },
+        { label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61583442551000' },
         { label: 'YouTube', href: 'https://www.youtube.com/@bluehorizonmx' },
       ],
       legal: '© 2025 Blue Horizon. Todos los derechos reservados.',
