@@ -49,13 +49,14 @@ const alternateOgLocales = locales
   .map((code) => localeToOg[code]);
 const ogImageSrc =
   typeof messages.meta.ogImage.src === 'string' ? messages.meta.ogImage.src : messages.meta.ogImage.src.src;
+const logoUrl = new URL('/favicon.png', Astro.url.origin).toString();
 const structuredDataObject = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   name: messages.meta.siteName,
   url: canonicalUrl,
   image: ogImageSrc,
-  logo: new URL('/favicon.svg', Astro.url.origin).toString(),
+  logo: logoUrl,
   description: messages.meta.description,
   telephone: sanitizedPhone,
   areaServed: {
@@ -100,7 +101,7 @@ const structuredData = JSON.stringify(structuredDataObject, null, 2);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32" />
     <meta name="generator" content={Astro.generator} />
     <title>{meta.title}</title>
     <meta name="description" content={meta.description} />

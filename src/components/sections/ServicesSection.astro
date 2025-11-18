@@ -9,6 +9,7 @@ interface Props {
     eyebrow: string;
     heading: string;
     intro: string;
+    showMoreLabel: string;
     categories: {
       id: string;
       title: string;
@@ -82,17 +83,8 @@ const { services, ctaLabel } = Astro.props satisfies Props;
                 </ul>
                 {hasExtraItems && (
                   <details class="group sm:hidden">
-                    <summary class="mt-4 flex cursor-pointer items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-sm font-semibold text-white shadow-[0_10px_40px_-25px_rgba(10,132,255,0.8)] transition hover:border-white/40 hover:bg-white/10 open:hidden">
-                      Show more
-                      <svg
-                        class="h-4 w-4"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                      >
-                        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-                      </svg>
+                    <summary class="mt-2 cursor-pointer text-center text-sm font-semibold text-sky-300 underline underline-offset-4 transition hover:text-sky-200 group-open:hidden">
+                      {services.showMoreLabel}
                     </summary>
                     <ul class="mt-4 grid gap-3 text-sm text-white/90">
                       {extraItems.map((item) => (

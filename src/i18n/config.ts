@@ -64,6 +64,7 @@ export type Messages = {
     eyebrow: string;
     heading: string;
     intro: string;
+    showMoreLabel: string;
     categories: ServiceCategory[];
   };
   successStories: {
@@ -122,8 +123,8 @@ export const messages: Record<Locale, Messages> = {
       siteName: 'Blue Horizon',
       locale: 'en_US',
       ogImage: {
-        src: 'https://images.unsplash.com/photo-1473181488821-2d23949a045a?auto=format&fit=crop&w=1600&q=80',
-        alt: 'Marine infrastructure project with divers preparing equipment on deck',
+        src: geo2.src,
+        alt: 'Industrial divers coordinating maintenance near a pier',
       },
     },
     nav: [
@@ -208,6 +209,7 @@ export const messages: Record<Locale, Messages> = {
       heading: 'Marine, onshore, and engineering solutions',
       intro:
         'Comprehensive maritime services, industrial diving, terrestrial maintenance, and specialized engineering tailored to complex coastal operations.',
+      showMoreLabel: 'Show more',
       categories: [
         {
           id: 'marine-services',
@@ -397,8 +399,8 @@ export const messages: Record<Locale, Messages> = {
       siteName: 'Blue Horizon',
       locale: 'es_MX',
       ogImage: {
-        src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80',
-        alt: 'Equipo marítimo mexicano realizando obras en un muelle al amanecer',
+        src: geo2.src,
+        alt: 'Buzos industriales coordinando mantenimiento cerca de un muelle',
       },
     },
     nav: [
@@ -483,6 +485,7 @@ export const messages: Record<Locale, Messages> = {
       heading: 'Servicios marítimos, terrestres e ingeniería especializada',
       intro:
         'Optimiza tus búsquedas con servicios marítimos, buceo industrial, mantenimiento terrestre, pailería, sand blast, hot tapping e ingeniería para estructuras.',
+      showMoreLabel: 'Ver más',
       categories: [
         {
           id: 'marine-services',
