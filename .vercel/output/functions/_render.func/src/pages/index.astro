@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import ValueSection from '../components/sections/ValueSection.astro';
+import ServicesSection from '../components/sections/ServicesSection.astro';
+import SuccessStoriesSection from '../components/sections/SuccessStoriesSection.astro';
+import ContactSection from '../components/sections/ContactSection.astro';
+import { defaultLocale, getMessages, locales, type Locale } from '../i18n/config';
+import { getAlternateLinks, buildLocaleUrl } from '../i18n/utils';
+
+const locale: Locale = defaultLocale;
+const messages = getMessages(locale);
+const alternateLinks = getAlternateLinks(locale, Astro.url);
+
+const languageSwitcher = {
+  current: locale,
+  options: locales.map((lang) => ({
+    label: lang.toUpperCase(),
+    value: lang,
+    href: buildLocaleUrl(lang, Astro.url),
+  })),
+};
+---
+
+<Layout locale={locale} messages={messages} alternateLinks={alternateLinks} languageSwitcher={languageSwitcher}>
+  <Hero hero={messages.hero} />
+  <ValueSection value={messages.value} />
+  <ServicesSection services={messages.services} ctaLabel={messages.contact.form.submitCta} />
+  <SuccessStoriesSection successStories={messages.successStories} />
+  <ContactSection contact={messages.contact} phoneNumber={messages.footer.contact.phone} />
+</Layout>

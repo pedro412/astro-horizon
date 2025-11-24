@@ -86,6 +86,8 @@ export type Messages = {
       companyLabel: string;
       messageLabel: string;
       submitCta: string;
+      successMessage: string;
+      errorMessage: string;
     };
     quickAction: {
       label: string;
@@ -344,6 +346,8 @@ export const messages: Record<Locale, Messages> = {
         companyLabel: 'Company',
         messageLabel: 'Project requirements',
         submitCta: 'Request a quote',
+        successMessage: 'Message sent. We will contact you shortly.',
+        errorMessage: 'Something went wrong. Please try again or email gerencia@bluehorizonmexico.com.',
       },
       quickAction: {
         label: 'Need immediate assistance?',
@@ -620,6 +624,8 @@ export const messages: Record<Locale, Messages> = {
         companyLabel: 'Empresa',
         messageLabel: 'Requerimientos del proyecto',
         submitCta: 'Solicitar cotización',
+        successMessage: 'Mensaje enviado. Te contactaremos en breve.',
+        errorMessage: 'Ocurrió un error. Inténtalo de nuevo o escribe a gerencia@bluehorizonmexico.com.',
       },
       quickAction: {
         label: '¿Necesitas respuesta inmediata?',
