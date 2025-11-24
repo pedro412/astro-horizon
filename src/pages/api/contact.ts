@@ -1,10 +1,12 @@
 import type { APIRoute } from 'astro';
 
-const env = import.meta.env as {
+type Env = {
   RESEND_API_KEY?: string;
   RESEND_FROM_EMAIL?: string;
   CONTACT_RECIPIENT?: string;
 };
+
+const getEnv = () => (import.meta.env ?? process.env) as Env;
 
 const escapeHtml = (value: string) =>
   value.replace(/[&<>"']/g, (char) => {
@@ -33,7 +35,16 @@ const buildRedirectUrl = (referer: string | null) => {
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
-  const formData = await request.formData();
+  let formData: FormData;
+  try {
+    formData = await request.formData();
+  } catch (error) {
+    console.error('Unable to parse contact form payload', error);
+    return new Response(JSON.stringify({ error: 'Invalid form data' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 
   const name = sanitize(formData.get('name'));
   const email = sanitize(formData.get('email'));
@@ -47,6 +58,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
+  const env = getEnv();
   const resendApiKey = env.RESEND_API_KEY;
   const resendFromEmail = env.RESEND_FROM_EMAIL ?? 'website@bluehorizonmexico.com';
   const contactRecipient = env.CONTACT_RECIPIENT ?? 'gerencia@bluehorizonmexico.com';
@@ -67,20 +79,29 @@ export const POST: APIRoute = async ({ request }) => {
     <p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>
   `;
 
-  const resendResponse = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${resendApiKey}`,
-    },
-    body: JSON.stringify({
-      from: `Blue Horizon Website <${resendFromEmail}>`,
-      to: [contactRecipient],
-      reply_to: email,
-      subject: `New contact from ${name}`,
-      html,
-    }),
-  });
+  let resendResponse: Response;
+  try {
+    resendResponse = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${resendApiKey}`,
+      },
+      body: JSON.stringify({
+        from: `Blue Horizon Website <${resendFromEmail}>`,
+        to: [contactRecipient],
+        reply_to: email,
+        subject: `New contact from ${name}`,
+        html,
+      }),
+    });
+  } catch (error) {
+    console.error('Resend API request failed', error);
+    return new Response(JSON.stringify({ error: 'Unable to send email' }), {
+      status: 502,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 
   if (!resendResponse.ok) {
     return new Response(JSON.stringify({ error: 'Unable to send email' }), {
