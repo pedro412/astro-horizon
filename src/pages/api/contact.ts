@@ -104,6 +104,17 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   if (!resendResponse.ok) {
+    let errorBody = '';
+    try {
+      errorBody = await resendResponse.text();
+    } catch (error) {
+      console.error('Resend error response read failed', error);
+    }
+    console.error('Resend API responded with an error', {
+      status: resendResponse.status,
+      statusText: resendResponse.statusText,
+      body: errorBody?.slice(0, 500),
+    });
     return new Response(JSON.stringify({ error: 'Unable to send email' }), {
       status: 502,
       headers: { 'Content-Type': 'application/json' },
