@@ -366,7 +366,7 @@ export const messages: Record<Locale, Messages> = {
       ],
       contactHeading: 'Contact',
       contact: {
-        phone: '938 133 0463',
+        phone: '938 180 9743',
         email: 'gerencia@bluehorizonmexico.com',
       },
       socialHeading: 'Follow us',
@@ -644,7 +644,7 @@ export const messages: Record<Locale, Messages> = {
       ],
       contactHeading: 'Contacto',
       contact: {
-        phone: '938 133 0463',
+        phone: '938 180 9743',
         email: 'gerencia@bluehorizonmexico.com',
       },
       socialHeading: 'Redes sociales',
