@@ -205,11 +205,6 @@ export const successStoriesPageCopy: Record<Locale, SuccessStoriesPageCopy> = {
         description:
           'Dedicated supervisors and CPR-trained divers deliver incident-free execution for oil & gas majors and hotel brands.',
       },
-      {
-        title: 'SEO-ready documentation',
-        description:
-          'Each project is catalogued with keywords, equipment, and KPIs to support corporate communications and tender submissions.',
-      },
     ],
     cta: {
       heading: 'Share your technical challenge',
@@ -251,11 +246,6 @@ export const successStoriesPageCopy: Record<Locale, SuccessStoriesPageCopy> = {
         title: 'HSSE integrado',
         description:
           'Supervisores dedicados y buzos certificados en primeros auxilios entregan ejecución sin incidentes para petroleras y marcas hoteleras.',
-      },
-      {
-        title: 'Documentación SEO',
-        description:
-          'Cada proyecto se cataloga con palabras clave, equipos y KPIs que apoyan licitaciones y comunicación corporativa.',
       },
     ],
     cta: {

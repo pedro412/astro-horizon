@@ -74,6 +74,7 @@ export type Messages = {
     featuredProjects: { heading: string; items: string[] };
     timeline: { heading: string; items: TimelineEntry[] };
     recentProjects: { heading: string; items: TimelineEntry[] };
+    caseStudiesCta?: { label: string; href: string };
     gallery: ImageAsset[];
   };
   contact: {
@@ -586,7 +587,7 @@ export const messages: Record<Locale, Messages> = {
         ],
       },
       recentProjects: {
-        heading: 'Proyectos recientes con alto valor SEO',
+        heading: 'Proyectos recientes con alto valor',
         items: [
           { year: '2021', description: 'Colocación de geotubos y retiro de pilotes' },
           { year: '2022', description: 'Recuperación de fugas submarinas y mantenimiento de cárcamos' },
@@ -597,6 +598,10 @@ export const messages: Record<Locale, Messages> = {
             description: 'Recuperación de playa en Villa Isla Blanca, Manigua y Cielo Lindo; mantenimiento de sistemas de bombeo',
           },
         ],
+      },
+      caseStudiesCta: {
+        label: 'Ver casos de recuperación de playas',
+        href: '/casos-de-exito-recuperacion-playas',
       },
       gallery: [
         {

@@ -80,6 +80,13 @@ const sanitizedPhone = footerContact.phone.replace(/[^+\d]/g, '');
             </li>
           ))}
         </ul>
+        {successStories.caseStudiesCta ? (
+          <div class="mt-6">
+            <Button variant="secondary" size="md" href={successStories.caseStudiesCta.href}>
+              {successStories.caseStudiesCta.label}
+            </Button>
+          </div>
+        ) : null}
       </div>
       <div class="space-y-4">
         {copy.insights.map((insight) => (
