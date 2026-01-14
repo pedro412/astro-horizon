@@ -389,16 +389,16 @@ export const messages: Record<Locale, Messages> = {
   },
   es: {
     meta: {
-      title: 'Blue Horizon – Soluciones Marítimas y Terrestres',
+      title: 'Recuperación de Playas con Geotubos | Blue Horizon México',
       description:
-        'Especialistas en construcción marítima, mantenimiento de muelles, buceo industrial, dragados y recuperación de playas para la industria petrolera y portuaria en México.',
+        'Soluciones con geotubos para recuperar playas afectadas por erosión costera en México. Ideal para hoteles y residencias.',
       keywords: [
-        'servicios marítimos México',
-        'buceo industrial México',
-        'mantenimiento de muelles',
-        'dragado y batimetría',
-        'colocación de geotubos México',
-        'Blue Horizon servicios marinos',
+        'recuperación de playas México',
+        'geotubos para erosión costera',
+        'protección de playas en hoteles',
+        'recuperación de playas para residencias',
+        'soluciones costeras México',
+        'Blue Horizon geotubos',
       ],
       siteName: 'Blue Horizon',
       locale: 'es_MX',
@@ -415,10 +415,10 @@ export const messages: Record<Locale, Messages> = {
       { label: 'Contacto', href: '#contact' },
     ],
     hero: {
-      tag: 'Soluciones marítimas y terrestres',
-      title: 'Blue Horizon – Soluciones Marítimas y Terrestres',
+      tag: 'Especialistas en recuperación de playas',
+      title: 'Recuperación de playas con geotubos en México',
       subtitle:
-        'Más de 20 años brindando servicios marítimos y terrestres, incluyendo mantenimiento en muelles, inspecciones submarinas, colocación de geotubos, dragados y apoyo a la industria petrolera y portuaria en México.',
+        'Somos especialistas en recuperación de playas frente a erosión costera con geotubos para hoteles y residencias en México.',
       primaryCta: 'Solicitar cotización',
       secondaryCta: 'Contáctanos',
       backgroundVideo:

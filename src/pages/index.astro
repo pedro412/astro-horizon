@@ -5,6 +5,7 @@ import ValueSection from '../components/sections/ValueSection.astro';
 import ServicesSection from '../components/sections/ServicesSection.astro';
 import SuccessStoriesSection from '../components/sections/SuccessStoriesSection.astro';
 import ContactSection from '../components/sections/ContactSection.astro';
+import SeoCtaSection from '../components/sections/SeoCtaSection.astro';
 import { defaultLocale, getMessages, locales, type Locale } from '../i18n/config';
 import { getAlternateLinks, buildLocaleUrl } from '../i18n/utils';
 
@@ -20,12 +21,47 @@ const languageSwitcher = {
     href: buildLocaleUrl(lang, Astro.url),
   })),
 };
+
+const canonicalPath = buildLocaleUrl(locale, Astro.url);
+const canonicalUrl = new URL(canonicalPath, Astro.url.origin).toString();
+const logoUrl = new URL('/favicon.png', Astro.url.origin).toString();
+
+const organizationStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: messages.meta.siteName,
+  url: canonicalUrl,
+  logo: logoUrl,
+};
+
+const serviceStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Recuperación de playas con geotubos',
+  serviceType: 'Recuperación de playas con geotubos',
+  areaServed: {
+    '@type': 'Country',
+    name: 'Mexico',
+  },
+  provider: {
+    '@type': 'ProfessionalService',
+    name: messages.meta.siteName,
+    url: canonicalUrl,
+  },
+};
 ---
 
-<Layout locale={locale} messages={messages} alternateLinks={alternateLinks} languageSwitcher={languageSwitcher}>
+<Layout
+  locale={locale}
+  messages={messages}
+  alternateLinks={alternateLinks}
+  languageSwitcher={languageSwitcher}
+  additionalStructuredData={[organizationStructuredData, serviceStructuredData]}
+>
   <Hero hero={messages.hero} />
   <ValueSection value={messages.value} />
   <ServicesSection services={messages.services} ctaLabel={messages.contact.form.submitCta} />
+  <SeoCtaSection />
   <SuccessStoriesSection successStories={messages.successStories} />
   <ContactSection contact={messages.contact} phoneNumber={messages.footer.contact.phone} />
 </Layout>

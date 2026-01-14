@@ -49,6 +49,8 @@ export const POST: APIRoute = async ({ request }) => {
   const name = sanitize(formData.get('name'));
   const email = sanitize(formData.get('email'));
   const company = sanitize(formData.get('company'));
+  const phone = sanitize(formData.get('phone'));
+  const location = sanitize(formData.get('location'));
   const message = sanitize(formData.get('message'));
 
   if (!name || !email || !message) {
@@ -75,6 +77,8 @@ export const POST: APIRoute = async ({ request }) => {
     <p><strong>Name:</strong> ${escapeHtml(name)}</p>
     <p><strong>Email:</strong> ${escapeHtml(email)}</p>
     <p><strong>Company:</strong> ${escapeHtml(company || 'N/A')}</p>
+    <p><strong>Phone:</strong> ${escapeHtml(phone || 'N/A')}</p>
+    <p><strong>Location / Project:</strong> ${escapeHtml(location || 'N/A')}</p>
     <p><strong>Message:</strong></p>
     <p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>
   `;

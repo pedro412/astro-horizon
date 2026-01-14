@@ -1,0 +1,96 @@
+---
+import Section from '../ui/Section.astro';
+import Container from '../ui/Container.astro';
+import Button from '../ui/Button.astro';
+
+interface Props {
+  id?: string;
+  heading?: string;
+}
+
+const {
+  id = 'diagnostico-playa',
+  heading = 'Solicita un diagnóstico de tu playa',
+} = Astro.props satisfies Props;
+---
+
+<Section id={id} background="tint">
+  <Container class="grid gap-12 lg:grid-cols-[1.1fr_1fr]">
+    <div class="space-y-6 text-white">
+      <h2 class="text-3xl font-display font-semibold">{heading}</h2>
+      <p class="text-lg text-white/85">
+        ¿Tu playa está perdiendo arena? Evaluamos viabilidad de geotubos en tu proyecto.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <Button variant="primary" size="lg" href={`#${id}`}>
+          Solicita un diagnóstico de tu playa
+        </Button>
+        <Button variant="secondary" size="lg" href={`#${id}`}>
+          Agenda una asesoría técnica
+        </Button>
+      </div>
+    </div>
+    <div
+      class="relative overflow-hidden rounded-[28px] border border-white/20 bg-[rgba(0,0,0,0)] p-8 text-white backdrop-blur-2xl"
+    >
+      <form class="grid gap-5" method="post" action="/api/contact">
+        <label class="block">
+          <span class="text-xs font-medium uppercase tracking-[0.2em] text-white">
+            Nombre
+          </span>
+          <input
+            type="text"
+            name="name"
+            required
+            class="mt-2 w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white shadow-inner shadow-black/10 focus:border-coral-200/60 focus:outline-none focus:ring-2 focus:ring-coral-200/30"
+          />
+        </label>
+        <label class="block">
+          <span class="text-xs font-medium uppercase tracking-[0.2em] text-white">
+            Email
+          </span>
+          <input
+            type="email"
+            name="email"
+            required
+            class="mt-2 w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white shadow-inner shadow-black/10 focus:border-coral-200/60 focus:outline-none focus:ring-2 focus:ring-coral-200/30"
+          />
+        </label>
+        <label class="block">
+          <span class="text-xs font-medium uppercase tracking-[0.2em] text-white">
+            Teléfono
+          </span>
+          <input
+            type="tel"
+            name="phone"
+            class="mt-2 w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white shadow-inner shadow-black/10 focus:border-coral-200/60 focus:outline-none focus:ring-2 focus:ring-coral-200/30"
+          />
+        </label>
+        <label class="block">
+          <span class="text-xs font-medium uppercase tracking-[0.2em] text-white">
+            Ubicación / proyecto
+          </span>
+          <input
+            type="text"
+            name="location"
+            class="mt-2 w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white shadow-inner shadow-black/10 focus:border-coral-200/60 focus:outline-none focus:ring-2 focus:ring-coral-200/30"
+          />
+        </label>
+        <label class="block">
+          <span class="text-xs font-medium uppercase tracking-[0.2em] text-white">
+            Mensaje
+          </span>
+          <textarea
+            name="message"
+            rows={4}
+            required
+            class="mt-2 w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white shadow-inner shadow-black/10 focus:border-coral-200/60 focus:outline-none focus:ring-2 focus:ring-coral-200/30"
+          ></textarea>
+        </label>
+        <Button type="submit" variant="primary" size="lg" class="justify-center">
+          Solicita un diagnóstico de tu playa
+        </Button>
+      </form>
+    </div>
+  </Container>
+</Section>
