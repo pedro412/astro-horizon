@@ -2,4 +2,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.bluehorizonmexico.com/sitemap-index.xml
-Sitemap: https://www.bluehorizonmx.com/sitemap-index.xml

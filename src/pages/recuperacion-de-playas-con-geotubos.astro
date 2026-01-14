@@ -1,0 +1,194 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/ui/Section.astro';
+import Container from '../components/ui/Container.astro';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import SeoCtaSection from '../components/sections/SeoCtaSection.astro';
+import geotubosCover from '../assets/geo1.jpg';
+import { caseStudies } from '../data/case-studies';
+import { defaultLocale, getMessages, type Locale } from '../i18n/config';
+import { buildLocaleUrl } from '../i18n/utils';
+
+const locale: Locale = defaultLocale;
+const messages = getMessages(locale);
+const alternateLinks: { href: string; lang: string }[] = [];
+
+const languageSwitcher = {
+  current: locale,
+  options: [
+    {
+      label: locale.toUpperCase(),
+      value: locale,
+      href: buildLocaleUrl(locale, Astro.url),
+    },
+  ],
+};
+
+const canonicalPath = buildLocaleUrl(locale, Astro.url);
+const canonicalUrl = new URL(canonicalPath, Astro.url.origin).toString();
+const logoUrl = new URL('/favicon.png', Astro.url.origin).toString();
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Recuperación de playas con geotubos' },
+];
+
+const breadcrumbStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    item: item.href ? new URL(item.href, Astro.url.origin).toString() : canonicalUrl,
+  })),
+};
+
+const organizationStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: messages.meta.siteName,
+  url: canonicalUrl,
+  logo: logoUrl,
+};
+
+const serviceStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Recuperación de playas con geotubos',
+  serviceType: 'Recuperación de playas con geotubos',
+  areaServed: {
+    '@type': 'Country',
+    name: 'Mexico',
+  },
+  provider: {
+    '@type': 'ProfessionalService',
+    name: messages.meta.siteName,
+    url: canonicalUrl,
+  },
+};
+
+const pageMeta = {
+  title: 'Recuperación de Playas con Geotubos en México | Blue Horizon',
+  description:
+    'Protección y recuperación de playas con geotubos. Solución técnica para erosión costera en hoteles, residencias y desarrollos frente al mar.',
+  ogImage: {
+    src: geotubosCover,
+    alt: 'Geotubos para recuperación de playas afectadas por erosión costera en México',
+  },
+};
+---
+
+<Layout
+  locale={locale}
+  messages={messages}
+  alternateLinks={alternateLinks}
+  languageSwitcher={languageSwitcher}
+  pageMeta={pageMeta}
+  additionalStructuredData={[breadcrumbStructuredData, organizationStructuredData, serviceStructuredData]}
+>
+  <Section class="bg-[#030711]">
+    <Container class="space-y-10 text-white">
+      <Breadcrumbs items={breadcrumbs} />
+      <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <div class="space-y-5">
+          <h1 class="text-4xl font-display font-semibold sm:text-5xl">
+            Recuperación de playas con geotubos
+          </h1>
+          <p class="text-lg text-white/85">
+            Protegemos frentes costeros en México con soluciones técnicas para hoteles, residencias y
+            desarrollos que enfrentan erosión costera y pérdida de playa.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a
+              href="#diagnostico-playa"
+              class="rounded-full border border-white/30 px-5 py-2 text-sm font-semibold transition hover:border-white/60"
+            >
+              Solicita un diagnóstico de tu playa
+            </a>
+            <a
+              href="#diagnostico-playa"
+              class="rounded-full border border-white/20 px-5 py-2 text-sm font-semibold text-white/80 transition hover:border-white/50 hover:text-white"
+            >
+              Agenda una asesoría técnica
+            </a>
+          </div>
+        </div>
+        <div class="overflow-hidden rounded-[28px] border border-white/10">
+          <Image
+            src={geotubosCover}
+            alt="Geotubos para recuperación de playas afectadas por erosión costera en México"
+            widths={[400, 800, 1200]}
+            sizes="(max-width: 1024px) 100vw, 40vw"
+            loading="lazy"
+            class="h-full w-full object-cover"
+          />
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container class="space-y-12 text-white">
+      <div class="space-y-4">
+        <h2 class="text-2xl font-semibold">
+          ¿Qué son los geotubos y cómo ayudan a recuperar playas?
+        </h2>
+        <p class="text-white/80">
+          Los geotubos son estructuras geotextiles diseñadas para contener y estabilizar arena. Al
+          ubicarse estratégicamente, reducen la energía del oleaje y facilitan la recuperación de playas
+          con intervenciones menos invasivas.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h2 class="text-2xl font-semibold">
+          Erosión costera: causas y riesgos para hoteles y residencias
+        </h2>
+        <p class="text-white/80">
+          La erosión costera puede acelerar la pérdida de playa y afectar la percepción del valor de
+          hoteles y residencias frente al mar. Evaluar la dinámica costera permite definir soluciones
+          técnicas acordes al sitio.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h2 class="text-2xl font-semibold">Proceso técnico de instalación</h2>
+        <p class="text-white/80">
+          Realizamos levantamientos, modelado de oleaje, diseño de la línea de defensa, instalación de
+          geotubos, relleno de arena y monitoreo de desempeño para asegurar resultados sostenibles.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <h2 class="text-2xl font-semibold">Casos reales en México</h2>
+        <p class="text-white/80">
+          Conoce proyectos recientes donde la recuperación de playas con geotubos ha estabilizado
+          frentes costeros en el Golfo de México.
+        </p>
+        <div class="grid gap-4 md:grid-cols-2">
+          {caseStudies.map((study) => (
+            <a
+              class="rounded-2xl border border-white/15 p-4 transition hover:border-white/40"
+              href={`/casos-de-exito-recuperacion-playas/${study.slug}`}
+            >
+              <p class="text-lg font-semibold text-white">{study.title}</p>
+              <p class="text-sm text-white/70">{study.location}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h2 class="text-2xl font-semibold">Solicita una evaluación técnica</h2>
+        <p class="text-white/80">
+          Analizamos tu ubicación, objetivos y restricciones para proponer la solución más efectiva con
+          geotubos y estrategias complementarias de recuperación de playa.
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <SeoCtaSection heading="Solicita una evaluación técnica" />
+</Layout>

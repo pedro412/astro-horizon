@@ -1,0 +1,108 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import Section from '../../components/ui/Section.astro';
+import Container from '../../components/ui/Container.astro';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import geotubosCover from '../../assets/geo1.jpg';
+import { caseStudies } from '../../data/case-studies';
+import { defaultLocale, getMessages, type Locale } from '../../i18n/config';
+import { buildLocaleUrl } from '../../i18n/utils';
+
+const locale: Locale = defaultLocale;
+const messages = getMessages(locale);
+const alternateLinks: { href: string; lang: string }[] = [];
+
+const languageSwitcher = {
+  current: locale,
+  options: [
+    {
+      label: locale.toUpperCase(),
+      value: locale,
+      href: buildLocaleUrl(locale, Astro.url),
+    },
+  ],
+};
+
+const canonicalPath = buildLocaleUrl(locale, Astro.url);
+const canonicalUrl = new URL(canonicalPath, Astro.url.origin).toString();
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Casos de éxito: recuperación de playas en México' },
+];
+
+const breadcrumbStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    item: item.href ? new URL(item.href, Astro.url.origin).toString() : canonicalUrl,
+  })),
+};
+
+const pageMeta = {
+  title: 'Casos de Éxito | Recuperación de Playas con Geotubos',
+  description:
+    'Casos reales de recuperación de playas con geotubos en México. Resultados y proceso técnico aplicado.',
+  ogImage: {
+    src: geotubosCover,
+    alt: 'Geotubos para recuperación de playas afectadas por erosión costera en México',
+  },
+};
+---
+
+<Layout
+  locale={locale}
+  messages={messages}
+  alternateLinks={alternateLinks}
+  languageSwitcher={languageSwitcher}
+  pageMeta={pageMeta}
+  additionalStructuredData={[breadcrumbStructuredData]}
+>
+  <Section class="bg-[#030711]">
+    <Container class="space-y-10 text-white">
+      <Breadcrumbs items={breadcrumbs} />
+      <div class="space-y-4">
+        <h1 class="text-4xl font-display font-semibold">
+          Casos de éxito: recuperación de playas en México
+        </h1>
+        <p class="text-white/80">
+          Resultados reales de proyectos de recuperación de playas con geotubos en zonas costeras de México.
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container class="grid gap-6 text-white md:grid-cols-2">
+      {caseStudies.map((study) => (
+        <article class="overflow-hidden rounded-[24px] border border-white/10 bg-[#070c17]">
+          <Image
+            src={study.coverImage}
+            alt={study.coverAlt}
+            widths={[400, 800]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            loading="lazy"
+            class="h-52 w-full object-cover"
+          />
+          <div class="space-y-3 p-6">
+            <h2 class="text-xl font-semibold text-white">{study.title}</h2>
+            <p class="text-sm text-white/70">{study.excerpt}</p>
+            <p class="text-sm text-white/60">
+              {study.location} · <time datetime={study.date}>{study.date}</time>
+            </p>
+            <a
+              href={`/casos-de-exito-recuperacion-playas/${study.slug}`}
+              class="inline-flex items-center text-sm font-semibold text-coral-200 hover:text-coral-100"
+            >
+              Ver caso →
+            </a>
+          </div>
+        </article>
+      ))}
+    </Container>
+  </Section>
+</Layout>

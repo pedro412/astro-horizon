@@ -1,0 +1,127 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import Section from '../../components/ui/Section.astro';
+import Container from '../../components/ui/Container.astro';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import SeoCtaSection from '../../components/sections/SeoCtaSection.astro';
+import { caseStudies } from '../../data/case-studies';
+import { defaultLocale, getMessages, type Locale } from '../../i18n/config';
+import { buildLocaleUrl } from '../../i18n/utils';
+
+export async function getStaticPaths() {
+  return caseStudies.map((study) => ({
+    params: { slug: study.slug },
+    props: { study },
+  }));
+}
+
+const { study } = Astro.props;
+
+const locale: Locale = defaultLocale;
+const messages = getMessages(locale);
+const alternateLinks: { href: string; lang: string }[] = [];
+
+const languageSwitcher = {
+  current: locale,
+  options: [
+    {
+      label: locale.toUpperCase(),
+      value: locale,
+      href: buildLocaleUrl(locale, Astro.url),
+    },
+  ],
+};
+
+const canonicalPath = buildLocaleUrl(locale, Astro.url);
+const canonicalUrl = new URL(canonicalPath, Astro.url.origin).toString();
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Casos de éxito', href: '/casos-de-exito-recuperacion-playas' },
+  { label: study.title },
+];
+
+const breadcrumbStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    item: item.href ? new URL(item.href, Astro.url.origin).toString() : canonicalUrl,
+  })),
+};
+
+const articleStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: 'Recuperación de playas con geotubos',
+  description: study.metaDescription,
+  datePublished: study.date,
+  mainEntityOfPage: canonicalUrl,
+  image: new URL(study.coverImage.src, Astro.url.origin).toString(),
+  author: {
+    '@type': 'Organization',
+    name: messages.meta.siteName,
+  },
+};
+
+const pageMeta = {
+  title: study.metaTitle,
+  description: study.metaDescription,
+  ogImage: {
+    src: study.coverImage,
+    alt: study.coverAlt,
+  },
+};
+---
+
+<Layout
+  locale={locale}
+  messages={messages}
+  alternateLinks={alternateLinks}
+  languageSwitcher={languageSwitcher}
+  pageMeta={pageMeta}
+  additionalStructuredData={[breadcrumbStructuredData, articleStructuredData]}
+>
+  <Section class="bg-[#030711]">
+    <Container class="space-y-8 text-white">
+      <Breadcrumbs items={breadcrumbs} />
+      <div class="space-y-4">
+        <h1 class="text-4xl font-display font-semibold">
+          Recuperación de playas con geotubos
+        </h1>
+        <h2 class="text-xl font-semibold text-white/90">{study.subtitle}</h2>
+        <p class="text-sm text-white/70">
+          {study.location} · <time datetime={study.date}>{study.date}</time>
+        </p>
+      </div>
+      <div class="overflow-hidden rounded-[28px] border border-white/10">
+        <Image
+          src={study.coverImage}
+          alt={study.coverAlt}
+          widths={[600, 1200]}
+          sizes="(max-width: 1024px) 100vw, 70vw"
+          loading="lazy"
+          class="h-72 w-full object-cover"
+        />
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container class="space-y-10 text-white">
+      {study.sections.map((section) => (
+        <div class="space-y-3">
+          <h2 class="text-2xl font-semibold">{section.heading}</h2>
+          {section.paragraphs.map((paragraph) => (
+            <p class="text-white/80">{paragraph}</p>
+          ))}
+        </div>
+      ))}
+    </Container>
+  </Section>
+
+  <SeoCtaSection />
+</Layout>
